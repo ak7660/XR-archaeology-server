@@ -1,0 +1,404 @@
+{
+  "basic": {
+    "add": "Ավելացնել",
+    "admin": "Ադմին",
+    "cancel": "Չեղարկել",
+    "change": "Փոխել",
+    "clear": "Մաքրել",
+    "clone": "Կլոնավորել",
+    "close": "Փակել",
+    "confirm": "Հաստատել",
+    "createdAt": "Ստեղծված է",
+    "delete": "Ջնջել",
+    "edit": "Խմբագրել",
+    "email": "Էլ. փոստ",
+    "export": "Արտահանել",
+    "forgetPass": "Մոռացել եմ գաղտնաբառը",
+    "headerSettings": "Գլխագիր կարգավորումներ",
+    "loading": "Բեռնվում է",
+    "login": "Մուտք",
+    "logout": "Ելք",
+    "modified": "Փոփոխված",
+    "modifiedBy": "Փոփոխված է",
+    "name": "Անուն",
+    "ok": "Լավ",
+    "password": "Գաղտնաբառ",
+    "price": "Գին",
+    "refresh": "Թարմացնել",
+    "register": "Գրանցվել",
+    "reset": "Վերակայել",
+    "remove": "Հեռացնել",
+    "resend": "Նորից ուղարկել",
+    "resetPass": "Վերակայել գաղտնաբառը",
+    "save": "Պահպանել",
+    "search": "Որոնել",
+    "start": "Սկսել",
+    "total": "Ընդամենը"
+  },
+  "cond": {
+    "lt": "Քիչ քան",
+    "gt": "Ավելի քան",
+    "lte": "Քիչ կամ հավասար",
+    "gte": "Ավելի կամ հավասար",
+    "eq": "Հավասար է",
+    "ne": "Հավասար չէ",
+    "inRange": "Շրջանակում",
+    "in": "Մեջ",
+    "nin": "Բացառում է",
+    "contains": "Պարունակում է",
+    "notContains": "Չի պարունակում",
+    "to": "Դեպի"
+  },
+  "editor": {
+    "deleteItem": "Ջնջե՞լ այս տարրը:",
+    "delete": "Ջնջել...",
+    "totalItems_one": "Ընդամենը {{count}} տարր",
+    "totalItems_other": "Ընդամենը {{count}} տարր"
+  },
+  "pages": {
+    "admins": {
+      "$": "Ադմիններ",
+      "role": "Դեր"
+    },
+    "appUsers": {
+      "$": "Հավելվածի օգտատերեր",
+      "firstName": "Անուն",
+      "lastName": "Ազգանուն",
+      "username": "Օգտանուն",
+      "phone": "Հեռախոս",
+      "dob": "Ծննդյան ամսաթիվ",
+      "bookmarks": "Էջանիշեր",
+      "collections": "Հավաքածուներ",
+      "verified": "Էլ. փոստը հաստատված է"
+    },
+    "artifacts": {
+      "$": "Արտեֆակտներ",
+      "desc": "Նկարագրություն",
+      "location": "Տեղադրություն",
+      "date": "Ամսաթիվ",
+      "tags": "Թեգեր",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "width": "Լայնություն",
+      "length": "Երկարություն",
+      "height": "Բարձրություն",
+      "file": {
+        "$": "Ֆայլ",
+        "object": ".obj ֆայլ",
+        "material": ".mtl ֆայլ",
+        "texture": "Թեքստուրա"
+      }
+    },
+    "arComments": {
+      "$": "Մեկնաբանություններ",
+      "user": "Օգտատեր",
+      "content": "Բովանդակություն",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն"
+    },
+    "tags": {
+      "$": "Թեգեր"
+    },
+    "arTags": {
+      "$": "Թեգեր"
+    },
+    "buildings": {
+      "$": "AR շենքեր",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "rotation": {
+        "$": "Պտույտ",
+        "x": "X առանցք",
+        "y": "Y առանցք",
+        "z": "Z առանցք"
+      },
+      "file": {
+        "$": "Ֆայլ",
+        "object": ".obj ֆայլ",
+        "material": ".mtl ֆայլ",
+        "texture": "Թեքստուրա"
+      }
+    },
+    "attractions": {
+      "attractions": "Ատրակցիաներ",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "desc": "Նկարագրություն",
+      "thumbnails": "Մանրապատկերներ",
+      "contact": "Կապի համար",
+      "order": "Կարգ",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "type": "Տիպ",
+      "businessHours": {
+        "$": "Աշխատանքային ժամեր",
+        "openTime": "Բացման ժամ",
+        "closeTime": "Փակման ժամ",
+        "days": "Շաբաթվա օրեր"
+      },
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      },
+      "entranceFee": "Մուտքի վճար",
+      "tags": "Թեգեր"
+    },
+    "restaurants": {
+      "restaurants": "Ռեստորաններ",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "desc": "Նկարագրություն",
+      "thumbnails": "Մանրապատկերներ",
+      "contact": "Կապի համար",
+      "order": "Կարգ",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "type": "Տիպ",
+      "businessHours": {
+        "$": "Աշխատանքային ժամեր",
+        "openTime": "Բացման ժամ",
+        "closeTime": "Փակման ժամ",
+        "days": "Շաբաթվա օրեր"
+      },
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      },
+      "entranceFee": "Մուտքի վճար",
+      "tags": "Թեգեր"
+    },
+    "lodgings": {
+      "lodgings": "Բնակարաններ",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "desc": "Նկարագրություն",
+      "thumbnails": "Մանրապատկերներ",
+      "contact": "Կապի համար",
+      "order": "Կարգ",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "type": "Տիպ",
+      "businessHours": {
+        "$": "Աշխատանքային ժամեր",
+        "openTime": "Բացման ժամ",
+        "closeTime": "Փակման ժամ",
+        "days": "Շաբաթվա օրեր"
+      },
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      },
+      "entranceFee": "Մուտքի վճար",
+      "tags": "Թեգեր"
+    },
+    "venues": {
+      "venues": "Վայրեր",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "desc": "Նկարագրություն",
+      "thumbnails": "Մանրապատկերներ",
+      "contact": "Կապի համար",
+      "order": "Կարգ",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "type": "Տիպ",
+      "businessHours": {
+        "$": "Աշխատանքային ժամեր",
+        "openTime": "Բացման ժամ",
+        "closeTime": "Փակման ժամ",
+        "days": "Շաբաթվա օրեր"
+      },
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      },
+      "entranceFee": "Մուտքի վճար",
+      "tags": "Թեգեր"
+    },
+    "documents": {
+      "$": "Փաստաթղթեր",
+      "page": "Էջ հավելվածում",
+      "order": "Կարգ",
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      }
+    },
+    "events": {
+      "$": "Իրադարձություններ",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "content": "Բովանդակություն",
+      "images": "Նկարներ",
+      "venue": "Վայր",
+      "startDate": "Սկսման ամսաթիվ",
+      "endDate": "Ավարտի ամսաթիվ",
+      "order": "Կարգ"
+    },
+    "experience": {
+      "$": "Փորձառություն",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "desc": "Նկարագրություն",
+      "images": "Նկարներ",
+      "venue": "Վայր",
+      "order": "Կարգ",
+      "language": "Հասանելի լեզուներ",
+      "address": "Հասցեի տեքստ",
+      "addressLink": "Հասցեի հղում (Yandex/Google Map հղում)",
+      "duration": "Տևողություն",
+      "phone": "կապի համար",
+      "contactText": "Կապի անունը",
+      "personalLink": "Կապի սոցիալական հաշվի հղումը",
+      "businessHours": {
+        "$": "Աշխատանքային ժամեր",
+        "openTime": "Բացման ժամ",
+        "closeTime": "Փակման ժամ",
+        "days": "Շաբաթվա օրեր"
+      },
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      }
+    },
+    "locations": {
+      "$": "Տեղադրություններ",
+      "desc": "Նկարագրություն",
+      "latitude": "Լայնություն",
+      "longitude": "Երկարություն",
+      "images": "Նկարներ",
+      "route": "Երթուղի",
+      "order": "Կարգ"
+    },
+    "routes": {
+      "$": "Երթուղիներ",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "desc": "Նկարագրություն",
+      "thumbnails": "Մանրապատկերներ",
+      "difficulty": "Բարդություն",
+      "order": "Կարգ",
+      "content": {
+        "$": "Բովանդակություն",
+        "heading": "Գլխագիր",
+        "desc": "Նկարագրություն",
+        "images": "Նկարներ"
+      }
+    },
+    "groups": {
+      "AR": "AR",
+      "hike": "Զբոսանք"
+    }
+  },
+  "enum": {
+    "pages": {
+      "admins": {
+        "role": {
+          "admin": "Ադմին",
+          "editor": "Խմբագիր"
+        }
+      },
+      "attractions": {
+        "type": {
+          "Attraction": "Ատրակցիա",
+          "Restaurant": "Ռեստորան",
+          "Lodging": "Բնակարան",
+          "Other": "Վայր"
+        },
+        "businessHours": {
+          "days": {
+            "Sunday": "Կիրակի",
+            "Monday": "Երկուշաբթի",
+            "Tuesday": "Երեքշաբթի",
+            "Wednesday": "Չորեքշաբթի",
+            "Thursday": "Հինգշաբթի",
+            "Friday": "Ուրբաթ",
+            "Saturday": "Շաբաթ"
+          }
+        }
+      },
+      "experience": {
+        "businessHours": {
+          "days": {
+            "Sunday": "Կիրակի",
+            "Monday": "Երկուշաբթի",
+            "Tuesday": "Երեքշաբթի",
+            "Wednesday": "Չորեքշաբթի",
+            "Thursday": "Հինգշաբթի",
+            "Friday": "Ուրբաթ",
+            "Saturday": "Շաբաթ"
+          }
+        }
+      },
+      "restaurants": {
+        "type": {
+          "Attraction": "Ատրակցիա",
+          "Restaurant": "Ռեստորան",
+          "Lodging": "Բնակարան",
+          "Other": "Վայր"
+        },
+        "businessHours": {
+          "days": {
+            "Sunday": "Կիրակի",
+            "Monday": "Երկուշաբթի",
+            "Tuesday": "Երեքշաբթի",
+            "Wednesday": "Չորեքշաբթի",
+            "Thursday": "Հինգշաբթի",
+            "Friday": "Ուրբաթ",
+            "Saturday": "Շաբաթ"
+          }
+        }
+      },
+      "lodgings": {
+        "type": {
+          "Attraction": "Ատրակցիա",
+          "Restaurant": "Ռեստորան",
+          "Lodging": "Բնակարան",
+          "Other": "Վայր"
+        },
+        "businessHours": {
+          "days": {
+            "Sunday": "Կիրակի",
+            "Monday": "Երկուշաբթի",
+            "Tuesday": "Երեքշաբթի",
+            "Wednesday": "Չորեքշաբթի",
+            "Thursday": "Հինգշաբթի",
+            "Friday": "Ուրբաթ",
+            "Saturday": "Շաբաթ"
+          }
+        }
+      },
+      "venues": {
+        "type": {
+          "Attraction": "Ատրակցիա",
+          "Restaurant": "Ռեստորան",
+          "Lodging": "Բնակարան",
+          "Other": "Վայր"
+        },
+        "businessHours": {
+          "days": {
+            "Sunday": "Կիրակի",
+            "Monday": "Երկուշաբթի",
+            "Tuesday": "Երեքշաբթի",
+            "Wednesday": "Չորեքշաբթի",
+            "Thursday": "Հինգշաբթի",
+            "Friday": "Ուրբաթ",
+            "Saturday": "Շաբաթ"
+          }
+        }
+      },
+      "routes": {
+        "difficulty": {
+          "Easy": "Հեշտ",
+          "Moderate": "Միջին",
+          "Difficult": "Բարդ"
+        }
+      }
+    }
+  }
+}

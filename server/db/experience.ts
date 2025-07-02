@@ -13,6 +13,8 @@ const schema: SchemaDefExt = {
     },
   ],
 
+  phone: { type: String },
+
   contactText: { type: String },
 
   personalLink: { type: String },

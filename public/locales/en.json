@@ -251,6 +251,7 @@
       "address": "Address Text",
       "addressLink": "Address link(Yandex/Google Map Link)",
       "duration": "Duration",
+      "phone": "contact's number",
       "contactText": "The contact name",
       "personalLink": "The contact's social account link",
       "businessHours": {
