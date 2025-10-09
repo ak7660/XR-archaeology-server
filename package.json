@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "watch:css": "postcss styles/tailwind.css -o styles/main.css",
-    "devMongo": "mkdir -p data && npx kill-port 27017 && mongod --dbpath data --replSet rs0",
+    "devMongo": "mkdir -p data && mongod --dbpath data --replSet rs0",
     "docker:start": "docker-compose up",
     "docker:build": "docker-compose up --build",
     "docker:force": "docker-compose up --build --force-recreate --renew-anon-volumes",
