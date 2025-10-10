@@ -121,8 +121,21 @@
     },
     "attractions": {
       "attractions": "Attractions",
-      "briefDesc": "Brief Description",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)"
+      },
       "thumbnails": "Thumbnails",
       "contact": "Contact No.",
       "order": "Order",
@@ -146,8 +159,21 @@
     },
     "restaurants": {
       "restaurants": "Restaurants",
-      "briefDesc": "Brief Description",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)"
+      },
       "thumbnails": "Thumbnails",
       "contact": "Contact No.",
       "order": "Order",
@@ -171,8 +197,21 @@
     },
     "lodgings": {
       "lodgings": "Lodgings",
-      "briefDesc": "Brief Description",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)"
+      },
       "thumbnails": "Thumbnails",
       "contact": "Contact No.",
       "order": "Order",
@@ -196,8 +235,21 @@
     },
     "venues": {
       "venues": "Venues",
-      "briefDesc": "Brief Description",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)"
+      },
       "thumbnails": "Thumbnails",
       "contact": "Contact No.",
       "order": "Order",

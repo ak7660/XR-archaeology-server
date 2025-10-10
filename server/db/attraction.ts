@@ -1,9 +1,18 @@
 import type { SchemaDefExt } from "../feathers/schema";
 
 const schema: SchemaDefExt = {
-  name: { type: String, index: true },
-  briefDesc: { type: String, $editor: { props: { multiLine: true } } },
-  desc: { type: String, $editor: { props: { multiLine: true } } },
+  name: { 
+    en: { type: String, index: true, $editor: { label: "Name (English)" } },
+    hy: { type: String, index: true, $editor: { label: "Name (Armenian)" } },
+  },
+  briefDesc: { 
+    en: { type: String, $editor: { props: { multiLine: true }, label: "Brief Description (English)" } },
+    hy: { type: String, $editor: { props: { multiLine: true }, label: "Brief Description (Armenian)" } },
+   },
+  desc: { 
+    en: { type: String, $editor: { props: { multiLine: true }, label: "Description (English)" } },
+    hy: { type: String, $editor: { props: { multiLine: true }, label: "Description (Armenian)" } },
+   },
   content: [
     {
       heading: { type: String },
@@ -47,28 +56,28 @@ const schema: SchemaDefExt = {
   $params: {
     editor: [
       {
-        headers: ["name", "order"],
+        headers: ["name.en", "name.hy", "order"],
         name: "attractions",
         path: "attractions",
         filter: { type: "Attraction" },
         icon: "MdOutlineWbSunny",
       },
       {
-        headers: ["name", "order"],
+        headers: ["name.en", "name.hy", "order"],
         name: "restaurants",
         path: "restaurants",
         filter: { type: "Restaurant" },
         icon: "MdOutlineRestaurant",
       },
       {
-        headers: ["name", "order"],
+        headers: ["name.en", "name.hy", "order"],
         name: "lodgings",
         path: "lodgings",
         filter: { type: "Lodging" },
         icon: "MdOutlineBed",
       },
       {
-        headers: ["name", "order"],
+        headers: ["name.en", "name.hy", "order"],
         name: "venues",
         path: "venues",
         filter: { type: "Other" },
