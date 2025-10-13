@@ -124,17 +124,20 @@
       "name": {
         "$": "Name",
         "en": "Name (English)",
-        "hy": "Name (Armenian)"
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
       },
       "briefDesc": {
         "$": "Brief Description",
         "en": "Brief Description (English)",
-        "hy": "Brief Description (Armenian)"
+        "hy": "Brief Description (Armenian)",
+        "ru": "Brief Description (Russian)"
       },
       "desc": {
         "$": "Description",
         "en": "Description (English)",
-        "hy": "Description (Armenian)"
+        "hy": "Description (Armenian)",
+        "ru": "Description (Russian)"
       },
       "thumbnails": "Thumbnails",
       "contact": "Contact No.",
