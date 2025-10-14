@@ -97,7 +97,13 @@
       "longitude": "Longitude"
     },
     "tags": {
-      "$": "Tags"
+      "$": "Tags",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
+      }
     },
     "arTags": {
       "$": "Tags"
@@ -165,17 +171,20 @@
       "name": {
         "$": "Name",
         "en": "Name (English)",
-        "hy": "Name (Armenian)"
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
       },
       "briefDesc": {
         "$": "Brief Description",
         "en": "Brief Description (English)",
-        "hy": "Brief Description (Armenian)"
+        "hy": "Brief Description (Armenian)",
+        "ru": "Brief Description (Russian)"
       },
       "desc": {
         "$": "Description",
         "en": "Description (English)",
-        "hy": "Description (Armenian)"
+        "hy": "Description (Armenian)",
+        "ru": "Description (Russian)"
       },
       "thumbnails": "Thumbnails",
       "contact": "Contact No.",
@@ -276,6 +285,12 @@
     },
     "documents": {
       "$": "Documents",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
+      },
       "page": "Page in app",
       "order": "Order",
       "content": {
@@ -287,8 +302,24 @@
     },
     "events": {
       "$": "Events",
-      "briefDesc": "Brief Description",
-      "content": "Content",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)",
+        "ru": "Brief Description (Russian)"
+      },
+      "content" : {
+        "$": "Content",
+        "en": "Content (English)",
+        "hy": "Content (Armenian)",
+        "ru": "Content (Russian)"
+      },
       "images": "Images",
       "venue": "Venue",
       "startDate": "Start date",
@@ -297,8 +328,24 @@
     },
     "experience": {
       "$": "Experience",
-      "briefDesc": "Brief Description",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)",
+        "ru": "Brief Description (Russian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)",
+        "ru": "Description (Russian)"
+      },
       "images": "Images",
       "venue": "Venue",
       "order": "Order",
@@ -324,7 +371,18 @@
     },
     "locations": {
       "$": "Locations",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)",
+        "ru": "Description (Russian)"
+      },
       "latitude": "Latitude",
       "longitude": "Longitude",
       "images": "Images",
@@ -333,8 +391,24 @@
     },
     "routes": {
       "$": "Routes",
-      "briefDesc": "Brief Description",
-      "desc": "Description",
+      "name": {
+        "$": "Name",
+        "en": "Name (English)",
+        "hy": "Name (Armenian)",
+        "ru": "Name (Russian)"
+      },
+      "briefDesc": {
+        "$": "Brief Description",
+        "en": "Brief Description (English)",
+        "hy": "Brief Description (Armenian)",
+        "ru": "Brief Description (Russian)"
+      },
+      "desc": {
+        "$": "Description",
+        "en": "Description (English)",
+        "hy": "Description (Armenian)",
+        "ru": "Description (Russian)"
+      },
       "thumbnails": "Thumbnails",
       "difficulty": "Difficulty",
       "order": "Order",

@@ -1,7 +1,12 @@
+import { required } from "feathers-hooks-common";
 import type { SchemaDefExt } from "../feathers/schema";
 
 const schema: SchemaDefExt = {
-  name: { type: String, index: true, required: true },
+  name: {
+    en: { type: String, index: true,required:true, $editor: { label: "Name (English)" } },
+    hy: { type: String, index: true, $editor: { label: "Name (Armenian)" } },
+    ru: { type: String, index: true, $editor: { label: "Name (Russian)" } },
+  },
   content: [
     {
       heading: { type: String },

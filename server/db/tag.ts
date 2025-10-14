@@ -1,7 +1,11 @@
 import type { SchemaDefExt } from "../feathers/schema";
 
 const schema: SchemaDefExt = {
-  name: { type: String, required: true, index: true },
+  name: {
+    en: { type: String, index: true, required: true, $editor: { label: "Name (English)" } },
+    hy: { type: String, index: true, $editor: { label: "Name (Armenian)" } },
+    ru: { type: String, index: true, $editor: { label: "Name (Russian)" } },
+  },
   createdAt: { type: Date, default: Date },
 
   $services: {
