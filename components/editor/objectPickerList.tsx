@@ -118,11 +118,18 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
     const isActive = idx !== -1;
     return (
       <div key={item[idProperty]} className={`item ${isActive ? "item-active" : ""}`} onClick={() => pickItem(item)}>
-        {nameFields.map((field) => (
-          <div key={field.name} className="flex-grow">
-            {item[field.name]}
-          </div>
-        ))}
+        {nameFields.map((field) => {
+          let value = item[field.name];
+          // Handle multi-language objects - use English value
+          if (value && typeof value === "object" && value.en) {
+            value = value.en;
+          }
+          return (
+            <div key={field.name} className="flex-grow">
+              {value}
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -135,6 +142,10 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
           {(selectedItems || []).map((item, index) => {
             let name = nameFields.length ? item[nameFields[0].name] : item["name"];
             if (translate) name = t(_.get(item, ["name", "$t"])) || "";
+            // Handle multi-language objects - use English value
+            if (name && typeof name === "object" && name.en) {
+              name = name.en;
+            }
             const isDeleted = name === undefined || name === null;
             name ??= "[DELETED]";
             return (

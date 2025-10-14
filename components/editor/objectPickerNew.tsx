@@ -113,6 +113,10 @@ function ObjectPickerNew({ path, returnObject, query, inputValue, onChange, requ
           let name = typeof item === "string" ? item : nameFields.length ? item[nameFields[0].name] : item["name"];
 
           if (translate) name = t(_.get(item, ["name", "$t"]) || "");
+          // Handle multi-language objects - use English value
+          if (name && typeof name === "object" && name.en) {
+            name = name.en;
+          }
           const isDeleted = name === undefined || name === null;
           name ??= "[DELETED]";
           const isActive = isSelected(item);
