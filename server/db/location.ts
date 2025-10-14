@@ -32,7 +32,7 @@ const schema: SchemaDefExt = {
   },
   $params: {
     editor: {
-      headers: ["name", "latitude", "longitude", "order"],
+      headers: ["name.en", "name.hy", "name.ru", "latitude", "longitude", "order"],
       icon: "MdLocationOn",
       group: "hike",
       groupIcon: "MdLandscape",

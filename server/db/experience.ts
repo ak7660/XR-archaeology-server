@@ -61,7 +61,7 @@ const schema: SchemaDefExt = {
   },
   $params: {
     editor: {
-      headers: ["name", "order"],
+      headers: ["name.en", "name.hy", "name.ru", "order"],
       icon: "MdEvent",
       groupIcon: "MdEmojiEmotions",
     },

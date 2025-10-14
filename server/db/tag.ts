@@ -21,7 +21,7 @@ const schema: SchemaDefExt = {
 
   $params: {
     editor: {
-      headers: ["name", "createdAt"],
+      headers: ["name.en", "name.hy", "name.ru", "createdAt"],
       icon: "MdTag",
     },
   },
