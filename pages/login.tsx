@@ -2,9 +2,10 @@ import { useAuth } from "@/contexts/auth";
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useHeaderContext } from "@/contexts/header";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const { login } = useAuth();
   const router = useRouter();
   const { setTitle } = useHeaderContext();

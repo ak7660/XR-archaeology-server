@@ -1,4 +1,4 @@
-import { useRef, type ReactElement, type ReactNode } from "react";
+import { useRef, Suspense, type ReactElement, type ReactNode } from "react";
 import type { NextPage, NextPageContext } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -46,7 +46,11 @@ export default function MyApp({ Component, baseURL, pageProps }: AppPropsWithLay
         <AuthProvider>
           <SchemasProvider>
             <ViewSettingProvider>
-              <HeaderProvider>{getLayout(<Component {...pageProps} />)}</HeaderProvider>
+              <HeaderProvider>
+                <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
+                  {getLayout(<Component {...pageProps} />)}
+                </Suspense>
+              </HeaderProvider>
             </ViewSettingProvider>
           </SchemasProvider>
         </AuthProvider>
