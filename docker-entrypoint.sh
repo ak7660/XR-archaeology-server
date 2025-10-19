@@ -25,14 +25,11 @@ echo "   - Public API: http://localhost:3002/api"
 # Function to handle shutdown
 cleanup() {
     echo "⚠️  Shutting down services..."
-    kill $API_PID $NEXTJS_PID 2>/dev/null
+    kill $API_PID $NEXTJS_PID 2>/dev/null || true
     exit 0
 }
 
-trap cleanup SIGTERM SIGINT
+trap cleanup INT TERM
 
-# Wait for any process to exit
-wait -n
-
-# Exit with status of process that exited first
-exit $?
+# Keep script running and wait for both processes
+wait

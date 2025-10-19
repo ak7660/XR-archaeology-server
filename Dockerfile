@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
+# Rebuild sharp for the current platform
+RUN yarn add sharp --ignore-engines --force
+
 # Install ts-node globally for server
 RUN yarn global add ts-node tsconfig-paths
 
