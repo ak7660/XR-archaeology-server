@@ -20,9 +20,12 @@ function createClient(baseURL?: string) {
     transports: ["websocket"],
   });
   socket.on("connect", function () {
+    console.log("Socket connected");
     connected = true;
   });
-  socket.on("reconnect", function () { });
+  socket.on("reconnect", function () {
+    console.log("Socket reconnected");
+  });
   socket.on("disconnect", function () {
     console.log("Socket disconnects");
     connected = false;
