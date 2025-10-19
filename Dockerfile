@@ -16,4 +16,4 @@ RUN yarn build
 EXPOSE 3000 3001 3002
 
 # Start both API server and Next.js
-CMD ["sh", "-c", "node server/index.js & yarn start"]
+CMD ["yarn", "start"]
