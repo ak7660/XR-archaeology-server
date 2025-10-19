@@ -31,10 +31,15 @@ dist
 *.swo
 *~
 
+# Git
+.git
+.gitignore
+
 # Docker
-Dockerfile
-.dockerignore
 docker-compose.yml
 
 # Data
 data/
+
+# README
+README.md
