@@ -13,6 +13,8 @@ function createClient(baseURL?: string) {
   }
   apiURL = baseHost + "/api";
 
+  console.log("Feathers client connecting to:", apiURL);
+
   const socket = socketio(baseHost, {
     path: "/api/socket.io",
     transports: ["websocket"],
