@@ -49,7 +49,7 @@ export default function DataTableCell({ item, header }: Props) {
             {(value || []).map((it, index) => (
               <div key={index}>
                 {(header.inner || []).map((h) => (
-                  <DataTableCell item={it} header={h} />
+                  <DataTableCell key={h.value} item={it} header={h} />
                 ))}
               </div>
             ))}
@@ -61,7 +61,7 @@ export default function DataTableCell({ item, header }: Props) {
         return (
           <div key={`${header.value}`}>
             {(header.inner || []).map((h) => (
-              <DataTableCell item={value} header={h} />
+              <DataTableCell key={h.value} item={value} header={h} />
             ))}
           </div>
         );
