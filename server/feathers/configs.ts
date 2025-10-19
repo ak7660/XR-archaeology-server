@@ -63,7 +63,7 @@ class config {
   get proto() {
     // FIXME: this is a temporary fix
     if (loadAdminPagePrepath()?.protocol) {
-      return loadAdminPagePrepath().protocol
+      return loadAdminPagePrepath().protocol;
     }
     return this.prod || hostname || process.env.FORCE_HTTPS ? "https" : "http";
   }

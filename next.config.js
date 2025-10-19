@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 
 /** @type {import('next').NextConfig} */
-const page_prefix = dotenv.config().parsed?.page_prefix ?? ''; 
+const page_prefix = process.env.NEXT_PUBLIC_PAGE_PREFIX || dotenv.config().parsed?.page_prefix || ''; 
 
 module.exports = {
   basePath: page_prefix,
