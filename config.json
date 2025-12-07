@@ -9,7 +9,7 @@
     "api": {
       "type": "api",
       "source": "./index.ts",
-      "port": 3001
+      "port": 9000
     },
     "public": {
       "type": "api",
@@ -18,13 +18,13 @@
     },
     "next": {
       "type": "next",
-      "port": 3000,
+      "port": 8080,
       "nextSource": "next.config.js"
     },
     "internal": {
       "type": "api",
       "source": "./index.ts",
-      "port": 9000,
+      "port": 9001,
       "internal": true
     }
   }
