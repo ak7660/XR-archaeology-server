@@ -157,3 +157,5 @@ data
 # in yarn build, many eslint error here.
 # dot not have time to fix it
 .eslintignore
+/dump
+/migration
