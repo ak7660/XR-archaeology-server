@@ -295,8 +295,18 @@
       "order": "Order",
       "content": {
         "$": "Content",
-        "heading": "Heading",
-        "desc": "Description",
+        "heading": {
+          "$": "Heading",
+          "en": "Heading (English)",
+          "hy": "Heading (Armenian)",
+          "ru": "Heading (Russian)"
+        },
+        "desc": {
+          "$": "Description",
+          "en": "Description (English)",
+          "hy": "Description (Armenian)",
+          "ru": "Description (Russian)"
+        },
         "images": "Images"
       }
     },
@@ -314,7 +324,7 @@
         "hy": "Brief Description (Armenian)",
         "ru": "Brief Description (Russian)"
       },
-      "content" : {
+      "content": {
         "$": "Content",
         "en": "Content (English)",
         "hy": "Content (Armenian)",
