@@ -20,20 +20,26 @@ function createServer<T = any>(servers: RequireContext, item: ServerDef) {
   const app = express();
 
   const whitelist = _.map(configs.servers, (v, k) => configs.getUrl(k));
+  // Add allowed origins from environment variable (comma-separated)
+  if (process.env.CORS_ORIGINS) {
+    whitelist.push(...process.env.CORS_ORIGINS.split(",").map((s) => s.trim()));
+  }
   if (process.env.NODE_ENV === "production" && !item.corsAny) {
     console.log("CORS WhiteList", whitelist.join());
     app.use(
       "/api/",
       cors({
         origin: function (origin, callback) {
-          console.log(origin);
+          console.log("CORS origin check:", origin);
           if (whitelist.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
           } else {
+            console.warn("CORS blocked origin:", origin);
             callback(new Error("Not allowed by CORS"));
           }
         },
-        allowedHeaders: ["Authorization"],
+        allowedHeaders: ["Authorization", "Content-Type", "X-Requested-With"],
+        credentials: true,
       })
     );
   } else {
