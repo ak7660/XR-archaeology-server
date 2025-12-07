@@ -24,27 +24,40 @@ function createServer<T = any>(servers: RequireContext, item: ServerDef) {
   if (process.env.CORS_ORIGINS) {
     whitelist.push(...process.env.CORS_ORIGINS.split(",").map((s) => s.trim()));
   }
+  
+  // CORS configuration for all environments
+  const corsOptions = {
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      if (process.env.NODE_ENV === "production" && !item.corsAny) {
+        if (whitelist.indexOf(origin) !== -1) {
+          callback(null, true);
+        } else {
+          console.warn("CORS blocked origin:", origin);
+          callback(new Error("Not allowed by CORS"));
+        }
+      } else {
+        // In development, allow all origins
+        callback(null, true);
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Authorization", "Content-Type", "X-Requested-With", "Accept"],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  };
+
   if (process.env.NODE_ENV === "production" && !item.corsAny) {
     console.log("CORS WhiteList", whitelist.join());
-    app.use(
-      "/api/",
-      cors({
-        origin: function (origin, callback) {
-          console.log("CORS origin check:", origin);
-          if (whitelist.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-          } else {
-            console.warn("CORS blocked origin:", origin);
-            callback(new Error("Not allowed by CORS"));
-          }
-        },
-        allowedHeaders: ["Authorization", "Content-Type", "X-Requested-With"],
-        credentials: true,
-      })
-    );
-  } else {
-    app.use(cors());
   }
+  
+  // Apply CORS to all routes
+  app.use(cors(corsOptions));
 
   app.set("port", configs.port);
 
