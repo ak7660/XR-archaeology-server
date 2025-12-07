@@ -24,7 +24,7 @@ function createServer<T = any>(servers: RequireContext, item: ServerDef) {
   if (process.env.CORS_ORIGINS) {
     whitelist.push(...process.env.CORS_ORIGINS.split(",").map((s) => s.trim()));
   }
-  
+
   // CORS configuration for all environments
   const corsOptions = {
     origin: function (origin, callback) {
@@ -55,7 +55,7 @@ function createServer<T = any>(servers: RequireContext, item: ServerDef) {
   if (process.env.NODE_ENV === "production" && !item.corsAny) {
     console.log("CORS WhiteList", whitelist.join());
   }
-  
+
   // Apply CORS to all routes
   app.use(cors(corsOptions));
 
