@@ -15,8 +15,9 @@ import "../plugins/i18n";
 MyApp.getInitialProps = async (ctx: NextPageContext) => {
   try {
     const { def: configs } = await import("@configs");
-    // temp VPN for transferring dev api url
-    const baseURL = configs.prod ? configs.getUrl("internal") : process.env.API_URL ?? configs.getUrl("api");
+    // In production, use the public API URL (from env or api server config)
+    // In development, use API_URL env or api server config
+    const baseURL = process.env.API_URL ?? configs.getUrl("api");
     return { baseURL };
   } catch (error) {
     return {};
