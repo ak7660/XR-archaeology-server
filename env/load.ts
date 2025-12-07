@@ -1,13 +1,13 @@
-import { config } from 'dotenv';
+import { config } from "dotenv";
 
 // Try to load from .env file (for local development)
 const { error, parsed } = config();
 
 export function loadAdminPagePrepath() {
-  if (error && process.env.NODE_ENV !== 'production') {
-    console.warn('load env failed. please follow readme.md');
+  if (error && process.env.NODE_ENV !== "production") {
+    console.warn("load env failed. please follow readme.md");
   }
-  
+
   // In production (Railway), use process.env directly
   // In development, use parsed .env file or fall back to process.env
   return {
