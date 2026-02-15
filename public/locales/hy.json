@@ -345,6 +345,32 @@
     "groups": {
       "AR": "AR",
       "hike": "Զբոսանք"
+    },
+    "arReconstructions": {
+      "$": "AR Վերակառուցումներ",
+      "briefDesc": "Հակիրճ նկարագրություն",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "model": "3D Մոդել",
+      "images": "Նկարներ",
+      "reversed": "Հակառակ",
+      "route": "Երթուղի",
+      "triggerDistance": "Գործարկման հեռավորություն (մ)",
+      "order": "Կարգ"
+    },
+    "storyboards": {
+      "$": "Պատմություններ",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "images": "Նկարներ",
+      "pages": {
+        "$": "Էջեր",
+        "text": "Տեքստ",
+        "imageIndex": "Նկարի ինդեքս"
+      },
+      "route": "Երթուղի",
+      "triggerDistance": "Գործարկման հեռավորություն (մ)",
+      "order": "Կարգ"
     }
   },
   "enum": {

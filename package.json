@@ -11,9 +11,9 @@
     "lint": "next lint",
     "watch:css": "postcss styles/tailwind.css -o styles/main.css",
     "devMongo": "mkdir -p data && mongod --dbpath data --replSet rs0",
-    "docker:start": "docker-compose up",
-    "docker:build": "docker-compose up --build",
-    "docker:force": "docker-compose up --build --force-recreate --renew-anon-volumes",
+    "docker:start": "docker compose up",
+    "docker:build": "docker compose up --build",
+    "docker:force": "docker compose up --build --force-recreate --renew-anon-volumes",
     "server:start": "ts-node -r tsconfig-paths/register server/index.ts",
     "admin": "INIT_ADMIN=1 ts-node -r tsconfig-paths/register server/index.ts",
     "public": "ssh -R tests-server:80:localhost:3002 -R admin-tests-server:80:localhost:3001 serveo.net -R apsap-tests-server:80:localhost:3000"

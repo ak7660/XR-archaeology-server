@@ -36,9 +36,7 @@ export function computeComponent({ field, item, onChange, openDialog, key, showL
               field: f,
               item: item,
               onChange: (value) => {
-                item ??= {};
-                item[f.path] = value;
-                onChange(item);
+                onChange({ ...(item ?? {}), [f.path]: value });
               },
               openDialog,
             })
@@ -84,7 +82,7 @@ export function computeComponent({ field, item, onChange, openDialog, key, showL
     case "checkbox":
       result = (
         <div className="flex justify-start">
-          <input key={key} type="checkbox" className="size-8" defaultValue={defaultValue} onChange={onChange} />
+          <input key={key} type="checkbox" className="size-8" checked={!!defaultValue} onChange={(e) => onChange(e.target.checked)} />
         </div>
       );
       break;
@@ -98,8 +96,7 @@ export function computeComponent({ field, item, onChange, openDialog, key, showL
                 item: defaultValue,
                 openDialog,
                 onChange: (v) => {
-                  defaultValue[f.path] = v;
-                  onChange(defaultValue);
+                  onChange({ ...defaultValue, [f.path]: v });
                 },
               })
             )}

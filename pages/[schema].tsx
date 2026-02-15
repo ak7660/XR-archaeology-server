@@ -92,7 +92,12 @@ const Page: NextPageWithLayout = ({ openDialog }: { openDialog: OpenDialog }) =>
         field,
         item,
         onChange: (value: any) => {
-          setItem((item) => ({ ...item, [field.path]: value }));
+          if (field.component === "editor-group") {
+            // editor-group onChange passes the complete updated item
+            setItem(value);
+          } else {
+            setItem((item) => ({ ...item, [field.path]: value }));
+          }
         },
         openDialog,
       });

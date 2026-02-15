@@ -196,6 +196,7 @@ dialog.edit-dialog,
   margin-right: 100px;
   overflow: hidden !important;
   position: relative;
+  color: theme(colors.gray.900);
   @apply rounded-2xl transition-all;
 }
 
@@ -301,6 +302,7 @@ input:focus-visible {
   overflow-y: hidden;
   overflow-x: auto;
   justify-items: center;
+  color: theme(colors.gray.900) !important;
 }
 
 .object-picker-menu {
@@ -309,6 +311,7 @@ input:focus-visible {
   overflow-x: hidden;
   align-items: center;
   background: theme(colors.gray.50);
+  color: theme(colors.gray.900) !important;
   @apply shadow-sm rounded gap-y-2;
 }
 
@@ -316,6 +319,7 @@ input:focus-visible {
   display: flex;
   padding: theme(spacing.2);
   cursor: pointer;
+  color: theme(colors.gray.900) !important;
   @apply hover:bg-gray-200 gap-x-2;
 }
 
@@ -325,6 +329,7 @@ input:focus-visible {
 
 .object-picker-new .item {
   background: theme(colors.white);
+  color: theme(colors.gray.900) !important;
   @apply drop-shadow p-3 rounded;
 }
 

@@ -97,7 +97,7 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
 
   const pickItem = (item: T) => {
     const index = selectedItems.findIndex((it) => it[idProperty] === item[idProperty]);
-    const items = selectedItems;
+    const items = [...selectedItems];
     if (index !== -1) {
       items.splice(index, 1);
     } else {
@@ -117,7 +117,7 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
     const idx = selectedItems.findIndex((it) => it[idProperty] === item[idProperty]);
     const isActive = idx !== -1;
     return (
-      <div key={item[idProperty]} className={`item ${isActive ? "item-active" : ""}`} onClick={() => pickItem(item)}>
+      <div key={item[idProperty]} className={`item ${isActive ? "item-active" : ""} text-gray-900`} onClick={() => pickItem(item)}>
         {nameFields.map((field) => {
           let value = item[field.name];
           // Handle multi-language objects - use English value
@@ -149,7 +149,7 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
             const isDeleted = name === undefined || name === null;
             name ??= "[DELETED]";
             return (
-              <div key={index} className="bg-gray-50 flex rounded items-center gap-x-3 px-2 chip">
+              <div key={index} className="bg-gray-50 flex rounded items-center gap-x-3 px-2 chip text-gray-900">
                 <div className={`${isDeleted ? "text-gray-500" : ""}`}>{name}</div>
                 <button type="button" onClick={() => pickItem(item)}>
                   <MdClear size={14} />

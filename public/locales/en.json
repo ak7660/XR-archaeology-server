@@ -429,6 +429,32 @@
         "images": "Images"
       }
     },
+    "arReconstructions": {
+      "$": "AR Reconstructions",
+      "briefDesc": "Brief Description",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "model": "3D Model",
+      "images": "Images",
+      "reversed": "Reversed",
+      "route": "Route",
+      "triggerDistance": "Trigger Distance (m)",
+      "order": "Order"
+    },
+    "storyboards": {
+      "$": "Storyboards",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "images": "Images",
+      "pages": {
+        "$": "Pages",
+        "text": "Text",
+        "imageIndex": "Image Index"
+      },
+      "route": "Route",
+      "triggerDistance": "Trigger Distance (m)",
+      "order": "Order"
+    },
     "groups": {
       "AR": "AR",
       "hike": "Hike"

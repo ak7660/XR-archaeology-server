@@ -130,7 +130,7 @@ function ObjectPickerNew({ path, returnObject, query, inputValue, onChange, requ
               <div className={`rounded-full h-fit w-fit border-2 ${isActive ? "border-blue-500" : "border-gray-600"}`}>
                 <div className={`rounded-full m-0.5 size-2 ${isActive ? "bg-blue-500" : "bg-gray-600"}`} />
               </div>
-              <div className={`${isDeleted ? "text-gray-500" : ""}`}>{name}</div>
+              <div className={`${isDeleted ? "text-gray-500" : "text-gray-900"}`}>{name}</div>
             </div>
           );
         })}

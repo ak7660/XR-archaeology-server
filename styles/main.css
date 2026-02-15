@@ -1285,6 +1285,11 @@ video {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -1596,6 +1601,7 @@ dialog.edit-dialog,
   margin-right: 100px;
   overflow: hidden !important;
   position: relative;
+  color: #111827;
   border-radius: 1rem;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1727,6 +1733,7 @@ input:focus-visible {
   overflow-y: hidden;
   overflow-x: auto;
   justify-items: center;
+  color: #111827 !important;
 }
 
 .object-picker-menu {
@@ -1735,6 +1742,7 @@ input:focus-visible {
   overflow-x: hidden;
   align-items: center;
   background: #f9fafb;
+  color: #111827 !important;
   row-gap: 0.5rem;
   border-radius: 0.25rem;
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -1746,6 +1754,7 @@ input:focus-visible {
   display: flex;
   padding: 0.5rem;
   cursor: pointer;
+  color: #111827 !important;
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
 }
@@ -1761,6 +1770,7 @@ input:focus-visible {
 
 .object-picker-new .item {
   background: #fff;
+  color: #111827 !important;
   border-radius: 0.25rem;
   padding: 0.75rem;
   --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));

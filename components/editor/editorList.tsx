@@ -87,9 +87,8 @@ export default function EditorList({ defaultItems, field, onChange, openDialog }
                   field: f,
                   item: item,
                   onChange: (value) => {
-                    item[f.path] = value;
                     let list = [...items];
-                    list[index] = item;
+                    list[index] = { ...item, [f.path]: value };
                     setValues(list);
                   },
                   openDialog,
