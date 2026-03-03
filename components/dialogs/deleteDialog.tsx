@@ -7,8 +7,20 @@ interface DeleteDialogProps<T> {
 }
 
 // TODO print out all header instead fixed name
-function DeleteDialog<T extends { _id?: string; name?: string }>({ item, deleteItemCore, ...props }: DeleteDialogProps<T> & DialogProps<T>) {
+function DeleteDialog<T extends { _id?: string; name?: string | Record<string, string> }>({ item, deleteItemCore, ...props }: DeleteDialogProps<T> & DialogProps<T>) {
   const [isDeleting, setDeleting] = useState(false);
+
+  const getDisplayName = (item: T): string => {
+    if (!item) return "";
+    if (item.name) {
+      if (typeof item.name === "string") return item.name;
+      if (typeof item.name === "object") {
+        // Handle multilingual name objects like {en: "...", hy: "...", ru: "..."}
+        return (item.name as Record<string, string>).en || Object.values(item.name).find((v) => v) || "";
+      }
+    }
+    return item._id ?? "";
+  };
 
   const deleteItem = async () => {
     setDeleting(true);
@@ -26,7 +38,7 @@ function DeleteDialog<T extends { _id?: string; name?: string }>({ item, deleteI
   return (
     <div className="h-full bg-slate-100 flex flex-col p-4">
       <h2 className="text-2xl">Confirm Delete?</h2>
-      <p>Name: {item && (item?.name ?? item._id ?? item.toString())}</p>
+      <p>Name: {getDisplayName(item)}</p>
       <div className="flex flex-row justify-between items-center mt-4">
         <button disabled={isDeleting} onClick={deleteItem} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 min-w-24 rounded">
           Delete
