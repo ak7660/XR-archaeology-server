@@ -1,4 +1,3 @@
-import attachments from "../feathers/attachments";
 import type { SchemaDefExt } from "../feathers/schema";
 
 const schema: SchemaDefExt = {
@@ -41,7 +40,21 @@ const schema: SchemaDefExt = {
     },
   },
 
-  $params: { editor: false },
+  $params: {
+    editor: {
+      headers: ["name", "type", "mime", "size", "date"],
+      icon: "MdPhotoLibrary",
+      order: 9999,
+    },
+    services: {
+      services: {
+        path: "attachments",
+      },
+      public: {
+        path: "attachments",
+      },
+    },
+  },
 };
 
 export default schema;

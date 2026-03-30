@@ -371,6 +371,16 @@
       "route": "Երթուղի",
       "triggerDistance": "Գործարկման հեռավորություն (մ)",
       "order": "Կարգ"
+    },
+    "attachments": {
+      "$": "Կցորդ",
+      "name": "Անուն",
+      "type": "Տեսակ",
+      "mime": "MIME",
+      "size": "Չափ",
+      "date": "Ամսաթիվ",
+      "confirmDelete": "Ջնջե՞լ այս նկարը",
+      "deleteFailed": "Նկարը ջնջել չհաջողվեց"
     }
   },
   "enum": {

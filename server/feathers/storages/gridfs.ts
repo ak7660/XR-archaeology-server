@@ -20,41 +20,63 @@ const getByteRange = function (header) {
 export default (opts: AttachmentOpts, app: Application): AttachmentStorage => {
   const storage = memoryStorage();
 
-  setTimeout(() => {
-    const attachments = app.service("attachments");
-    if (attachments) {
-      attachments.hooks({
-        after: {
-          remove(hook) {
-            const item: InfoType = hook.result;
-            if (item) {
-              const filesToRemove: string[] = [];
-              if (item.src.startsWith("gridfs://")) {
-                filesToRemove.push(item.src.substring(9));
-              }
-              if (item.sizes) {
-                for (let size of item.sizes) {
-                  if (size.src.startsWith("gridfs://")) {
-                    filesToRemove.push(size.src.substring(9));
+  // Register cleanup hook for deleted attachments - this will be set up after the service is available
+  const setupCleanupHook = () => {
+    try {
+      const attachments = app.service("attachments");
+      if (attachments) {
+        attachments.hooks({
+          after: {
+            remove(hook) {
+              const item: InfoType = hook.result;
+              if (item) {
+                const filesToRemove: string[] = [];
+                if (item.src && item.src.startsWith("gridfs://")) {
+                  filesToRemove.push(item.src.substring(9));
+                }
+                if (item.sizes) {
+                  for (let size of item.sizes) {
+                    if (size.src && size.src.startsWith("gridfs://")) {
+                      filesToRemove.push(size.src.substring(9));
+                    }
+                  }
+                }
+                if (filesToRemove.length > 0) {
+                  const db: Db = (<MongoClient>(<any>app).mdb).db();
+                  const bucket = new GridFSBucket(db, {
+                    bucketName: "fs",
+                  });
+                  for (let file of filesToRemove) {
+                    try {
+                      bucket.delete(new ObjectId(file));
+                    } catch (e) {
+                      console.warn("Error deleting GridFS file:", e);
+                    }
                   }
                 }
               }
-              if (filesToRemove.length > 0) {
-                const db: Db = (<MongoClient>(<any>app).mdb).db();
-
-                const bucket = new GridFSBucket(db, {
-                  bucketName: "fs",
-                });
-
-                for (let file of filesToRemove) {
-                  bucket.delete(new ObjectId(file));
-                }
-              }
-            }
+            },
           },
-        },
-      });
+        });
+        return true;
+      }
+    } catch (e) {
+      console.warn("Error setting up cleanup hook:", e);
     }
+    return false;
+  };
+
+  // Try to set up the hook immediately, and retry if needed
+  let hookSetupAttempts = 0;
+  const maxAttempts = 20; // Try for up to 10 seconds (20 * 500ms)
+  const hookSetupInterval = setInterval(() => {
+    if (setupCleanupHook() || hookSetupAttempts >= maxAttempts) {
+      clearInterval(hookSetupInterval);
+      if (hookSetupAttempts >= maxAttempts) {
+        console.warn("Failed to set up attachment cleanup hook after maximum retries");
+      }
+    }
+    hookSetupAttempts++;
   }, 500);
 
   const result: AttachmentStorage = {
@@ -65,7 +87,8 @@ export default (opts: AttachmentOpts, app: Application): AttachmentStorage => {
         const bucket = new GridFSBucket(db, {
           bucketName: "fs",
         });
-        info.src = info.src ?? "gridfs://" + info.id;
+        // Set the src if not already set
+        info.src = info.src ?? ("gridfs://" + (info.id || info._id));
         const id = info.id ? info.id : new ObjectId(info.src.substring(9));
 
         if (info.type === "image") {
@@ -96,11 +119,12 @@ export default (opts: AttachmentOpts, app: Application): AttachmentStorage => {
               .toBuffer();
           } catch (e) {
             if (opts.thumbRequired) throw new Error("Image is invalid");
-            console.log(e);
+            console.warn("Error processing image thumbnails:", e);
           }
         }
       } catch (error) {
-        console.log("multer gridfs error", error);
+        console.warn("GridFS updateInfo error:", error);
+        throw error;
       }
     },
     async handleImage(req, res, img, { acceptWebp, size }) {
@@ -187,15 +211,18 @@ export default (opts: AttachmentOpts, app: Application): AttachmentStorage => {
         const s = bucket.openUploadStream(path, {
           contentType: mime,
         });
-        await new Promise((resolve, reject) => {
-          s.once("error", reject);
-          s.write(data);
-          s.end(resolve);
-        });
 
-        return { id: s.id };
+        return new Promise<{ id: ObjectId }>((resolve, reject) => {
+          s.once("error", reject);
+          s.once("finish", () => {
+            resolve({ id: s.id });
+          });
+          s.write(data);
+          s.end();
+        });
       } catch (error) {
-        console.warn("upload error", error);
+        console.warn("GridFS upload error:", error);
+        throw error;
       }
     },
   };

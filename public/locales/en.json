@@ -455,6 +455,16 @@
       "triggerDistance": "Trigger Distance (m)",
       "order": "Order"
     },
+    "attachments": {
+      "$": "Attachments",
+      "name": "Name",
+      "type": "Type",
+      "mime": "MIME",
+      "size": "Size",
+      "date": "Date",
+      "confirmDelete": "Delete this image?",
+      "deleteFailed": "Failed to delete image"
+    },
     "groups": {
       "AR": "AR",
       "hike": "Hike"

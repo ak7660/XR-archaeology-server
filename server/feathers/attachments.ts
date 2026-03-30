@@ -167,7 +167,9 @@ export default (opts: AttachmentOpts) =>
       size: number,
       { parent, meta, user, hash, userContent, extra, query, accessToken }: UploadOptions
     ) {
-      const type = getFileTypeFromMime(mime);
+      const detectedType = getFileTypeFromMime(mime);
+      const requestedType = query?.type;
+      const type = requestedType === "image" || requestedType === "model" ? requestedType : detectedType;
 
       let info: InfoType = {
         type,

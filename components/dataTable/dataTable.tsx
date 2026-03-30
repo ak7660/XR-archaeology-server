@@ -54,6 +54,8 @@ export interface DataTableProps<T> {
   readonly path: string;
   items?: T[];
   headers?: DataTableHeader[];
+  showHeader?: boolean;
+  endSpacerHeight?: number;
   noPaginate?: boolean;
   query?: Record<string, any>;
   defaultSort?: string | string[];
@@ -496,11 +498,13 @@ const DataTable = forwardRef<any, DataTableProps<any>>(function DataTable<T>({ p
             {(props.showPreHeader ?? true) && (
               <div className="flex flex-row justify-between mt-6 mx-6">
                 <div className="flex">{t("editor.totalItems", { count: total })}</div>
-                <div>
-                  <button type="button" onClick={props.showViewSetting} title={t("basic.headerSettings")}>
-                    <MdOutlineEditNote size={24} />
-                  </button>
-                </div>
+                {props.showViewSetting ? (
+                  <div>
+                    <button type="button" onClick={props.showViewSetting} title={t("basic.headerSettings")}>
+                      <MdOutlineEditNote size={24} />
+                    </button>
+                  </div>
+                ) : null}
               </div>
             )}
 
@@ -511,25 +515,27 @@ const DataTable = forwardRef<any, DataTableProps<any>>(function DataTable<T>({ p
                 </div>
               )}
               {/* Header */}
-              <div
-                className="data-table-header flex flex-row sticky top-0 z-10 "
-                ref={(node) => {
-                  if (node) {
-                    setStickyHeaderHeight(node.clientHeight);
-                  }
-                }}
-              >
-                <div className="data-table-item-index border-b border-gray-200" />
-                <div className="border-b border-gray-200 data-table-row" style={{ gridTemplateColumns: gridTemplateColumns }}>
-                  {headers.map((header, index) => (
-                    <TableHeader key={index} header={header} sort={sort} sortDesc={sortDesc} toggleSort={toggleSort} />
-                  ))}
+              {(props.showHeader ?? true) && (
+                <div
+                  className="data-table-header flex flex-row sticky top-0 z-10 "
+                  ref={(node) => {
+                    if (node) {
+                      setStickyHeaderHeight(node.clientHeight);
+                    }
+                  }}
+                >
+                  <div className="data-table-item-index border-b border-gray-200" />
+                  <div className="border-b border-gray-200 data-table-row" style={{ gridTemplateColumns: gridTemplateColumns }}>
+                    {headers.map((header, index) => (
+                      <TableHeader key={index} header={header} sort={sort} sortDesc={sortDesc} toggleSort={toggleSort} />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
               {/* Rows */}
               <div role="group" className="flex flex-wrap flex-grow flex-shrink">
                 {data.map(renderItem)}
-                <div style={{ height: stickyHeaderHeight, width: "100%" }}></div>
+                <div style={{ height: props.endSpacerHeight ?? stickyHeaderHeight ?? 0, width: "100%" }}></div>
               </div>
             </div>
           </div>
