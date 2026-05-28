@@ -4,11 +4,10 @@ const schema: SchemaDefExt = {
   name: { type: String, required: true },
   latitude: { type: Number, min: -90, max: 90, required: true },
   longitude: { type: Number, min: -180, max: 180, required: true },
-  images: [{ type: "id", ref: "Attachment", fileType: "image" }],
   pages: [
     {
       text: { type: String, required: true, $editor: { props: { multiLine: true } } },
-      imageIndex: { type: Number, default: 0, min: 0 },
+      images: [{ type: "id", ref: "Attachment", fileType: "image" }],
     },
   ],
   route: { type: "id", ref: "Route", required: true },

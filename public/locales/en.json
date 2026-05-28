@@ -445,11 +445,10 @@
       "$": "Storyboards",
       "latitude": "Latitude",
       "longitude": "Longitude",
-      "images": "Images",
       "pages": {
         "$": "Pages",
         "text": "Text",
-        "imageIndex": "Image Index"
+        "images": "Images"
       },
       "route": "Route",
       "triggerDistance": "Trigger Distance (m)",

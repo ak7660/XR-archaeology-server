@@ -362,11 +362,10 @@
       "$": "Պատմություններ",
       "latitude": "Latitude",
       "longitude": "Longitude",
-      "images": "Նկարներ",
       "pages": {
         "$": "Էջեր",
         "text": "Տեքստ",
-        "imageIndex": "Նկարի ինդեքս"
+        "images": "Նկարներ"
       },
       "route": "Երթուղի",
       "triggerDistance": "Գործարկման հեռավորություն (մ)",
