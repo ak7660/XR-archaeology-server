@@ -4,6 +4,10 @@ const schema: SchemaDefExt = {
   name: { type: String, required: true },
   latitude: { type: Number, min: -90, max: 90, required: true },
   longitude: { type: Number, min: -180, max: 180, required: true },
+  introPage: {
+    text: { type: String, $editor: { props: { multiLine: true }, label: "Intro/Start Page Text" } },
+    images: [{ type: "id", ref: "Attachment", fileType: "image", $editor: { label: "Intro/Start Page Image" } }],
+  },
   pages: [
     {
       text: { type: String, required: true, $editor: { props: { multiLine: true } } },
