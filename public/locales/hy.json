@@ -362,6 +362,11 @@
       "$": "Պատմություններ",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "introPage": {
+        "$": "Intro Page",
+        "text": "Տեքստ",
+        "images": "Նկարներ"
+      },
       "pages": {
         "$": "Էջեր",
         "text": "Տեքստ",

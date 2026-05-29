@@ -445,6 +445,11 @@
       "$": "Storyboards",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "introPage": {
+        "$": "Intro Page",
+        "text": "Text",
+        "images": "Images"
+      },
       "pages": {
         "$": "Pages",
         "text": "Text",
