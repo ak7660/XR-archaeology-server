@@ -116,20 +116,33 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
   const renderMenuItem = ({ item, index }: { item: T; index: number }) => {
     const idx = selectedItems.findIndex((it) => it[idProperty] === item[idProperty]);
     const isActive = idx !== -1;
+    
+    let fallbackName = item["name"];
+    if (translate) fallbackName = t(_.get(item, ["name", "$t"])) || "";
+    if (fallbackName && typeof fallbackName === "object" && fallbackName.en) {
+      fallbackName = fallbackName.en;
+    }
+    
     return (
       <div key={item[idProperty]} className={`item ${isActive ? "item-active" : ""} text-gray-900`} onClick={() => pickItem(item)}>
-        {nameFields.map((field) => {
-          let value = item[field.name];
-          // Handle multi-language objects - use English value
-          if (value && typeof value === "object" && value.en) {
-            value = value.en;
-          }
-          return (
-            <div key={field.name} className="flex-grow">
-              {value}
-            </div>
-          );
-        })}
+        {nameFields.length > 0 ? (
+          nameFields.map((field) => {
+            let value = item[field.name];
+            // Handle multi-language objects - use English value
+            if (value && typeof value === "object" && value.en) {
+              value = value.en;
+            }
+            return (
+              <div key={field.name} className="flex-grow">
+                {value}
+              </div>
+            );
+          })
+        ) : (
+          <div className="flex-grow">
+            {fallbackName ?? "[DELETED]"}
+          </div>
+        )}
       </div>
     );
   };

@@ -117,6 +117,10 @@ export const DataTableProvider = ({ children }: Props) => {
         if (sItem) {
           cur = path !== null ? _.get(sItem, path) : sItem;
         }
+        // Handle multi-language objects - use English value
+        if (cur && typeof cur === "object" && cur.en) {
+          cur = cur.en;
+        }
         return cur;
       });
 
