@@ -1,7 +1,11 @@
 import fs from "fs";
 import os from "os";
+import crypto from "crypto";
 import _ from "lodash";
 import { loadAdminPagePrepath } from "@/env/load";
+
+/** Value left in config.json where a real secret used to be committed. */
+const PLACEHOLDER_SECRET = "set-via-APP_SECRET-and-WEB_SECRET-env-vars";
 
 const mpackage = (fs.existsSync("./package.json") && JSON.parse(fs.readFileSync("./package.json").toString())) || {
   name: "app",
@@ -40,6 +44,37 @@ class config {
   constructor(opts) {
     this._opts = opts || {};
     _.extend(this, opts);
+
+    // JWT signing secrets come from the environment, never from config.json.
+    //
+    // config.json is committed, so any secret written there is readable by
+    // anyone with repo access - and these two sign the auth tokens for the
+    // admin API (web) and the public/app API (app). They are set as APP_SECRET
+    // and WEB_SECRET in the deployment environment.
+    //
+    // The values still in config.json are inert placeholders kept only so the
+    // shape of the file is obvious; startup refuses to use them (see below).
+    if (process.env.APP_SECRET) {
+      this.app = _.assign({}, this.app, { secret: process.env.APP_SECRET });
+    }
+    if (process.env.WEB_SECRET) {
+      this.web = _.assign({}, this.web, { secret: process.env.WEB_SECRET });
+    }
+
+    for (const [name, envVar] of [
+      ["app", "APP_SECRET"],
+      ["web", "WEB_SECRET"],
+    ] as const) {
+      const secret = this[name]?.secret;
+      if (!secret || secret === PLACEHOLDER_SECRET) {
+        const message = `Missing ${envVar}. Set it in the environment - config.json no longer carries a usable ${name} secret.`;
+        // Failing fast in production beats silently signing tokens with a
+        // publicly known value.
+        if (process.env.NODE_ENV === "production") throw new Error(message);
+        console.warn(`[config] ${message} Falling back to an ephemeral development secret.`);
+        this[name] = _.assign({}, this[name], { secret: crypto.randomBytes(32).toString("hex") });
+      }
+    }
   }
 
   get mongodb() {

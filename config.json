@@ -1,9 +1,9 @@
 {
   "app": {
-    "secret": "f7f943278f0eeee11a707c987bb208133d6c279b26c2a97eae74ba9b8f203e6e"
+    "secret": "set-via-APP_SECRET-and-WEB_SECRET-env-vars"
   },
   "web": {
-    "secret": "f20b4b745a7caf3481a778f55bb3dc8f68d7a36b43fea81e48ed992b87801c35"
+    "secret": "set-via-APP_SECRET-and-WEB_SECRET-env-vars"
   },
   "servers": {
     "api": {
