@@ -159,3 +159,19 @@ data
 .eslintignore
 /dump
 /migration
+# Railway config-as-code, produced by `railway config pull`.
+#
+# Deliberately untracked. `railway config pull` writes the WHOLE-PROJECT
+# definition, not just this service - the file it generates here and the one it
+# generates in the sibling repo are byte-identical and both describe every
+# service. Committing it in more than one repo gives two copies that silently
+# diverge, and whichever is applied last wins.
+#
+# It is also not safe to apply as-is: the pulled file lists only the custom
+# domain for the server service and omits the Railway-generated domain that the
+# mobile app depends on, so `railway config apply` could remove it.
+#
+# To adopt it later: pick ONE repo as the owner, run `railway config plan`
+# (needs Node >= 22 - it uses --experimental-strip-types), confirm the diff is
+# empty, then commit it there and leave this ignore rule in the other repo.
+.railway/
