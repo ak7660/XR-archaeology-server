@@ -1,6 +1,6 @@
 import { useFeathers } from "@/contexts/feathers";
 import { useSchemasContext } from "@/contexts/schemas";
-import { getNameField, getNameFields } from "@/contexts/schemas/utils";
+import { displayName, getNameField, getNameFields } from "@/contexts/schemas/utils";
 import { SchemaFieldJson } from "@/server/feathers/schema";
 import _ from "lodash";
 import { useLayoutEffect, useState } from "react";
@@ -110,15 +110,11 @@ function ObjectPickerNew({ path, returnObject, query, inputValue, onChange, requ
       {/* radio buttons */}
       <div className="flex flex-wrap gap-2">
         {(items || []).map((item, index) => {
-          let name = typeof item === "string" ? item : nameFields.length ? item[nameFields[0].name] : item["name"];
+          let name = displayName(typeof item === "string" ? item : nameFields.length ? item[nameFields[0].name] : item["name"]);
 
           if (translate) name = t(_.get(item, ["name", "$t"]) || "");
-          // Handle multi-language objects - use English value
-          if (name && typeof name === "object" && name.en) {
-            name = name.en;
-          }
-          const isDeleted = name === undefined || name === null;
-          name ??= "[DELETED]";
+          const isDeleted = !name;
+          if (!name) name = "[DELETED]";
           const isActive = isSelected(item);
           return (
             <div

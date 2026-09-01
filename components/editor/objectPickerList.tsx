@@ -1,6 +1,6 @@
 import { useFeathers } from "@/contexts/feathers";
 import { useSchemasContext } from "@/contexts/schemas";
-import { getNameField, getNameFields } from "@/contexts/schemas/utils";
+import { displayName, getNameField, getNameFields } from "@/contexts/schemas/utils";
 import { SchemaFieldJson } from "@/server/feathers/schema";
 import _ from "lodash";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -139,21 +139,16 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
     const idx = selectedItems.findIndex((it) => it[idProperty] === item[idProperty]);
     const isActive = idx !== -1;
     
-    let fallbackName = item["name"];
+    let fallbackName = displayName(item["name"]);
     if (translate) fallbackName = t(_.get(item, ["name", "$t"])) || "";
-    if (fallbackName && typeof fallbackName === "object" && fallbackName.en) {
-      fallbackName = fallbackName.en;
-    }
     
     return (
       <div key={item[idProperty]} className={`item ${isActive ? "item-active" : ""} text-gray-900`} onClick={() => pickItem(item)}>
         {nameFields.length > 0 ? (
           nameFields.map((field) => {
-            let value = item[field.name];
-            // Handle multi-language objects - use English value
-            if (value && typeof value === "object" && value.en) {
-              value = value.en;
-            }
+            // displayName also falls back across languages and never returns
+            // an object, which React refuses to render.
+            const value = displayName(item[field.name]);
             return (
               <div key={field.name} className="flex-grow text-gray-900">
                 {value}
@@ -162,7 +157,7 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
           })
         ) : (
           <div className="flex-grow text-gray-900">
-            {fallbackName ?? "[DELETED]"}
+            {fallbackName || "[DELETED]"}
           </div>
         )}
       </div>
@@ -175,14 +170,10 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
         {/* chip */}
         <div className="flex gap-x-2">
           {(selectedItems || []).map((item, index) => {
-            let name = nameFields.length ? item[nameFields[0].name] : item["name"];
+            let name = displayName(nameFields.length ? item[nameFields[0].name] : item["name"]);
             if (translate) name = t(_.get(item, ["name", "$t"])) || "";
-            // Handle multi-language objects - use English value
-            if (name && typeof name === "object" && name.en) {
-              name = name.en;
-            }
-            const isDeleted = name === undefined || name === null;
-            name ??= "[DELETED]";
+            const isDeleted = !name;
+            if (!name) name = "[DELETED]";
             return (
               <div key={index} className="bg-gray-50 flex rounded items-center gap-x-3 px-2 chip text-gray-900">
                 {/* Colour stated explicitly rather than inherited. ObjectPickerNew

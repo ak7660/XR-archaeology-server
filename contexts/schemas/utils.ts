@@ -124,6 +124,27 @@ export function getHeaderFieldsByName(def: SchemaDefJson, names: string[]): Sche
   return names.map((field) => resolveField(def, field)).filter((it) => !!it);
 }
 
+/** Resolve a possibly-multilingual value to a string for display.
+ *
+ * Translated fields are stored as {en, hy, ru}. Callers used to inline
+ * `if (value && typeof value === "object" && value.en) value = value.en;`
+ * which has two problems: it ignores hy/ru, so a record translated but with an
+ * empty English string renders blank, and when `en` is falsy it leaves the
+ * OBJECT in place - React then throws "Objects are not valid as a React child".
+ */
+export function displayName(value: any, language: string = "en"): string {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "string") return value;
+  if (typeof value === "object") {
+    for (const key of [language, "en", "hy", "ru"]) {
+      const v = (value as any)[key];
+      if (typeof v === "string" && v.trim()) return v;
+    }
+    return "";
+  }
+  return String(value);
+}
+
 /**
  * Returns the `name` field of a schema
  * @param def schema definition in json format
@@ -132,6 +153,15 @@ export function getNameField(def: SchemaDefJson): SchemaFieldJson {
   if (!def.nameField) {
     def.nameField =
       def.schema?.fields?.find((it) => it.name === "name" && lookupType(it.type) === "string") ||
+      // A multilingual name is an OBJECT of {en, hy, ru} string subfields, not a
+      // string, so the check above misses it. Without this line the search fell
+      // through to "first string field", which on Attraction is `contact` - so
+      // every reference picker to a translated collection listed phone numbers,
+      // and rendered blank for the records that have no phone number.
+      //
+      // Match a field literally called `name` whatever its shape; consumers
+      // already resolve the language themselves.
+      def.schema?.fields?.find((it) => it.name === "name") ||
       def.schema?.fields?.find((it) => lookupType(it.type) === "string" && !isEnum(it));
     if (def.params?.nameField ?? (def.params?.editor as any)?.nameField) {
       const field = resolveField(def, def.params?.nameField ?? (def.params?.editor as any)?.nameField, true);
