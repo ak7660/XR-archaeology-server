@@ -138,6 +138,7 @@ export function computeComponent({ field, item, onChange, openDialog, key, showL
           onChange={onChange}
           multiple={props.multiple}
           items={props?.items}
+          query={props?.query}
           translate={props?.translate}
         />
       );

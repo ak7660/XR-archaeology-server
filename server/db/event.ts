@@ -18,7 +18,19 @@ const schema: SchemaDefExt = {
   },
   images: [{ type: "id", ref: "Attachment", fileType: "image" }],
 
-  venue: { type: "id", ref: "Attraction" },
+  /** Where the event takes place. One attraction, not several.
+   *
+   * The picker lists the whole `attractions` collection, which mixes venues
+   * with restaurants and lodging, so it is sorted by English name to make it
+   * navigable. Narrow it further by adding a filter to this query, e.g.
+   * `type: { $in: ["Attraction", "Other"] }` - an already-saved venue outside
+   * the filter still resolves and displays correctly.
+   */
+  venue: {
+    type: "id",
+    ref: "Attraction",
+    $editor: { props: { query: { $sort: { "name.en": 1 } } } },
+  },
   startDate: { type: Date, required: true },
   endDate: { type: Date },
 
