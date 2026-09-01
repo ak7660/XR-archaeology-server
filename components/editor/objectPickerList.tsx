@@ -155,13 +155,13 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
               value = value.en;
             }
             return (
-              <div key={field.name} className="flex-grow">
+              <div key={field.name} className="flex-grow text-gray-900">
                 {value}
               </div>
             );
           })
         ) : (
-          <div className="flex-grow">
+          <div className="flex-grow text-gray-900">
             {fallbackName ?? "[DELETED]"}
           </div>
         )}
@@ -185,7 +185,12 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
             name ??= "[DELETED]";
             return (
               <div key={index} className="bg-gray-50 flex rounded items-center gap-x-3 px-2 chip text-gray-900">
-                <div className={`${isDeleted ? "text-gray-500" : ""}`}>{name}</div>
+                {/* Colour stated explicitly rather than inherited. ObjectPickerNew
+                    already does this; here the non-deleted branch set no colour at
+                    all, so the label took whatever an ancestor happened to define -
+                    and when that matched the surrounding surface the text became
+                    unreadable. */}
+                <div className={isDeleted ? "text-gray-500" : "text-gray-900"}>{name}</div>
                 <button type="button" onClick={() => pickItem(item)}>
                   <MdClear size={14} />
                 </button>
