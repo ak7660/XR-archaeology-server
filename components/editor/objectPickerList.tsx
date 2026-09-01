@@ -28,7 +28,15 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
 
   const schemas = useSchemasContext();
   const feathers = useFeathers();
-  const { path, idProperty = "_id", multiple = true, returnObject = false, translate = false } = props;
+  // `multiple` defaults to FALSE, matching ObjectPickerNew.
+  //
+  // It used to default to true, so any single-reference field rendered by this
+  // picker (Event.venue, for one) behaved as a multi-select: picking a venue
+  // added a chip instead of replacing the current one, and onChange emitted an
+  // array into a field that stores a single id. def.ts only sets
+  // props.multiple = true for array fields, so a single ref arrives here as
+  // undefined and silently took the wrong default.
+  const { path, idProperty = "_id", multiple = false, returnObject = false, translate = false } = props;
 
   useLayoutEffect(() => {
     updateResolve();
@@ -36,23 +44,37 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
   }, []);
 
   useEffect(() => {
-    setSelectedItems((list) => {
-      let defaultValue = Array.isArray(props.defaultValue) ? props.defaultValue || [] : [props.defaultValue];
-      return defaultValue
-        .map((value) => {
-          if (typeof value === "string") {
-            const res = items.find((it) => it[idProperty] === value);
-            if (!res) {
+    let cancelled = false;
+
+    const resolve = async () => {
+      const defaultValue = Array.isArray(props.defaultValue) ? props.defaultValue || [] : [props.defaultValue];
+      const resolved = await Promise.all(
+        defaultValue
+          .filter((it) => !!it)
+          .map(async (value) => {
+            if (typeof value !== "string") return value;
+            const found = items.find((it) => it[idProperty] === value);
+            if (found) return found;
+            // The stored value is not in `items`. With a `query` in play that is
+            // expected - the record simply falls outside the filter - and
+            // returning the bare id string made the chip render "[DELETED]" for
+            // a perfectly valid selection. Fetch it directly so an existing
+            // value always displays, whatever the filter allows.
+            try {
+              return await feathers.service(path).get(value);
+            } catch {
               return value;
             }
-            return res;
-          } else {
-            return value;
-          }
-        })
-        .filter((it) => !!it);
-    });
-  }, [items]);
+          })
+      );
+      if (!cancelled) setSelectedItems(resolved.filter((it) => !!it) as T[]);
+    };
+
+    resolve();
+    return () => {
+      cancelled = true;
+    };
+  }, [items, props.defaultValue]);
 
   const updateResolve = async () => {
     if (path) {
@@ -177,7 +199,10 @@ function ObjectPickerList<T extends Record<string, any>, K extends keyof T>(prop
       {showMenu && (
         <div>
           <div className="absolute left-0 right-0 top-10 object-picker-menu z-20">
-            <DataList path={path} renderItem={renderMenuItem} />
+            {/* `query` was previously dropped here, so a schema could not
+                restrict or order the options a picker offered - the menu always
+                listed the whole collection in insertion order. */}
+            <DataList path={path} query={props.query} renderItem={renderMenuItem} />
           </div>
         </div>
       )}

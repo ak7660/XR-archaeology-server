@@ -348,6 +348,15 @@ export class EditorConfig {
           if (path) {
             component = editor?.props?.picker ? "object-picker-new" : "object-picker-list";
             props.path = path;
+            // A single `id` field is one reference, not a list. Only the array
+            // branch below sets multiple = true, so without this the pickers
+            // fell back to their own defaults - and they disagreed, which made
+            // single refs behave as multi-selects in the list picker.
+            props.multiple = false;
+            // Let a schema restrict or order the options, e.g.
+            //   venue: { type: "id", ref: "Attraction",
+            //            $editor: { props: { query: { $sort: { "name.en": 1 } } } } }
+            if (editor?.props?.query) props.query = editor.props.query;
             const nameField = getNameField(refTable);
             const nameFields = getNameFields(refTable);
 
