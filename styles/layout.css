@@ -327,6 +327,38 @@ input:focus-visible {
   color: theme(colors.green.500);
 }
 
+/* Belt and braces for the picker's readability.
+ *
+ * The selected-value chip had no rule of its own and its label set no colour
+ * class, so the text was whatever an ancestor happened to define. When that
+ * matched the surface behind it the value became unreadable - reported as
+ * "white writing", though the effect is really "same colour as the background".
+ *
+ * State colour AND background on the chip, and push the colour onto descendants
+ * so no nested element can inherit something else. Same for menu rows, and give
+ * the active row a tinted background so the selected venue is obvious rather
+ * than relying on a colour change alone.
+ */
+.object-picker .chip {
+  background: theme(colors.gray.100);
+  color: theme(colors.gray.900) !important;
+}
+
+.object-picker .chip * {
+  color: inherit !important;
+}
+
+.object-picker-menu .item * {
+  color: theme(colors.gray.900) !important;
+}
+
+.object-picker-menu .item-active,
+.object-picker-menu .item-active * {
+  color: theme(colors.green.700) !important;
+  background: theme(colors.green.50);
+  font-weight: 600;
+}
+
 .object-picker-new .item {
   background: theme(colors.white);
   color: theme(colors.gray.900) !important;
