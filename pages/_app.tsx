@@ -26,6 +26,9 @@ MyApp.getInitialProps = async (ctx: NextPageContext) => {
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
+  /** Public page (e.g. /privacy) rendered without the admin's API connection, login
+   * and schema loading, so it is server-rendered in full and shows even if the API is down. */
+  standalone?: boolean;
 };
 
 type AppPropsWithLayout = AppProps & {
@@ -37,6 +40,7 @@ export default function MyApp({ Component, baseURL, pageProps }: AppPropsWithLay
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
   const baseUrl = useRef<string>(baseURL); // fix next.js buggy refetch from server each time client navigate
+  if (Component.standalone) return <Component {...pageProps} />;
   return (
     <>
       <Head>
