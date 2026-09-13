@@ -8,6 +8,7 @@ import { requireContext } from "../utils/webpack";
 import configs from "@configs";
 import { getID } from "./utils";
 import cookieParser from "cookie-parser";
+import * as errors from "@feathersjs/errors";
 
 const storageEngines = requireContext("server/feathers/storages", true, /\.ts$/);
 
@@ -34,6 +35,9 @@ export interface AttachmentOpts {
       };
   userContent?: boolean;
   hooks?: any;
+  /** Who may upload. Receives the request's `params` after its token is checked;
+   * `false` turns uploads off. Without it, any signed-in caller may upload. */
+  canUpload?: false | ((params: any) => boolean);
 }
 
 export interface UploadOptions {
@@ -250,12 +254,31 @@ export default (opts: AttachmentOpts) =>
       }
     });
 
+    /** Checks the caller before multer stores anything: uploads need a valid
+     * token, and `opts.canUpload` decides which signed-in callers qualify. */
+    const uploadGuard = wrap(async function (req, res, next) {
+      if (opts.canUpload === false) throw new errors.Forbidden("Uploads are not accepted here");
+      const header = req.headers.authorization || "";
+      const accessToken = header.startsWith("Bearer ") ? header.substring(7) : <string>req.query.token;
+      if (!accessToken || accessToken === "undefined") throw new errors.NotAuthenticated("Sign in to upload files");
+      let result: any;
+      try {
+        result = await (<any>app.service("authentication")).authenticate({ strategy: "jwt", accessToken }, {}, "jwt");
+      } catch (e) {
+        throw new errors.NotAuthenticated("Sign in to upload files");
+      }
+      const params = { provider: "rest", user: result.user, authentication: result.authentication, internal: (<any>req).feathers?.internal };
+      if (opts.canUpload && !opts.canUpload(params)) throw new errors.Forbidden("No permission to upload files");
+      (<any>req).user = result.user;
+      next();
+    });
+
     var router = express.Router();
 
     // Register POST API for attachments
-    router.post("/upload", upload.single("file"), fileUploader);
-    router.post("/upload/:source", upload.single("file"), fileUploader);
-    router.post("/upload/:source/:id", upload.single("file"), fileUploader);
+    router.post("/upload", uploadGuard, upload.single("file"), fileUploader);
+    router.post("/upload/:source", uploadGuard, upload.single("file"), fileUploader);
+    router.post("/upload/:source/:id", uploadGuard, upload.single("file"), fileUploader);
 
     app.use("/attachments", router);
 

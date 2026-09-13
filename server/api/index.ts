@@ -2,6 +2,7 @@ import feather from "../feathers/feathers";
 import { SchemaServiceClass } from "../feathers/schemas";
 import configs from "@configs";
 import { requireContext } from "../utils/webpack";
+import { isStaff } from "../feathers/hooks";
 const services = requireContext("./server/api/services/", true, /\.(js|ts)$/);
 
 export default (internal) => {
@@ -19,8 +20,10 @@ export default (internal) => {
     api: {
       events: !internal,
       tasks: !internal,
+      // Admin API: collections without their own hooks are public-read, staff-write.
+      defaultHooks: "staffWrite",
     },
-    attachments: { internal },
+    attachments: { internal, canUpload: isStaff },
   });
   app.configure((app) => {
     app.use("/schemas", new SchemaServiceClass("services"));

@@ -50,6 +50,9 @@ export interface ServiceDef {
 export interface ApiOpts {
   events?: boolean;
   tasks?: boolean;
+  /** Hook set (a name exported by hooks.ts) applied to every service that declares
+   * no `hooks*` key of its own, so a new collection is protected by default. */
+  defaultHooks?: string;
 }
 /**
  * @param name for identifying/registering feathersjs's app name
@@ -169,6 +172,9 @@ export default function (
               },
             },
           });
+        }
+        if (opts.defaultHooks && !_.some(_.keys(item), (key) => key.startsWith("hooks"))) {
+          item = { ...item, hooks_Default: [opts.defaultHooks] };
         }
         _.each(item, (value, key) => {
           if (key.startsWith("hooks")) {
