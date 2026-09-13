@@ -35,20 +35,20 @@ const DeleteAccountPage: NextPageWithLayout = () => {
               </li>
             </ol>
             <p>
-              You're signed out straight away and your account can no longer be used. Everything listed below is removed from
+              You’re signed out straight away and your account can no longer be used. Everything listed below is removed from
               our systems within {DELETION_DAYS} days.
             </p>
           </Section>
 
-          <Section id="by-email" title="Can't open the app?">
+          <Section id="by-email" title="Can’t open the app?">
             <p>
               Email us from the address you use for your account, with the subject{" "}
-              <a href={mailto("Delete my account")}>Delete my account</a>. We'll reply to confirm it's you, then delete the
+              <a href={mailto("Delete my account")}>Delete my account</a>. We’ll reply to confirm it’s you, then delete the
               account within {DELETION_DAYS} days.
             </p>
           </Section>
 
-          <Section id="what" title="What's deleted, and what's kept">
+          <Section id="what" title="What’s deleted, and what’s kept">
             <p>We delete:</p>
             <ul>
               <li>your name, email address, phone number and password;</li>
@@ -60,8 +60,8 @@ const DeleteAccountPage: NextPageWithLayout = () => {
             <ul>
               {FEATURES.linkedFeedback && (
                 <li>
-                  your questionnaire answers, with the link to your account removed, so they can't be traced back to you. They're
-                  kept for the research until the project ends. Ask us if you'd like them deleted too.
+                  your questionnaire answers, with the link to your account removed, so they can’t be traced back to you. They’re
+                  kept for the research until the project ends. Ask us if you’d like them deleted too.
                 </li>
               )}
               <li>technical logs, which our hosting provider keeps for a limited period and then deletes.</li>
@@ -71,9 +71,9 @@ const DeleteAccountPage: NextPageWithLayout = () => {
       ) : (
         <>
           <div className={styles.summary}>
-            <h2>There's no account to delete</h2>
+            <h2>There’s no account to delete</h2>
             <p>
-              The {OPERATOR.name} app doesn't have user accounts yet, so it doesn't hold a profile about you. Here's how to
+              The {OPERATOR.name} app doesn’t have user accounts yet, so it doesn’t hold a profile about you. Here’s how to
               remove what does exist.
             </p>
           </div>
@@ -81,7 +81,7 @@ const DeleteAccountPage: NextPageWithLayout = () => {
           <Section id="phone" title="Information on your phone">
             <p>
               Your favourites, language choice and settings are stored only on your phone. To delete them, uninstall the app, or
-              go to your phone's <strong>Settings</strong>, then <strong>Apps</strong>, then <strong>{OPERATOR.name}</strong>,
+              go to your phone’s <strong>Settings</strong>, then <strong>Apps</strong>, then <strong>{OPERATOR.name}</strong>,
               then <strong>Storage</strong>, and tap <strong>Clear storage</strong>.
             </p>
           </Section>
@@ -89,16 +89,16 @@ const DeleteAccountPage: NextPageWithLayout = () => {
           <Section id="questionnaires" title="Questionnaire answers">
             <p>
               If you answered one of the questionnaires and want your answers deleted, email us with the subject{" "}
-              <a href={mailto("Delete my questionnaire answers")}>Delete my questionnaire answers</a>. Your answers aren't linked
+              <a href={mailto("Delete my questionnaire answers")}>Delete my questionnaire answers</a>. Your answers aren’t linked
               to your name, so tell us which questionnaire it was, roughly when you answered it, and something you wrote, so we
-              can find them. We'll delete them within {DELETION_DAYS} days and let you know.
+              can find them. We’ll delete them within {DELETION_DAYS} days and let you know.
             </p>
           </Section>
 
           <Section id="planner" title="Trip planner conversations">
             <p>
-              We don't save trip planner conversations. They're wiped whenever our server restarts and aren't linked to you, so
-              there's nothing to request from us. Moonshot AI, which writes the replies, keeps them according to its own policy.
+              We don’t save trip planner conversations. They’re wiped whenever our server restarts and aren’t linked to you, so
+              there’s nothing to request from us. Moonshot AI, which writes the replies, keeps them according to its own policy.
             </p>
           </Section>
         </>

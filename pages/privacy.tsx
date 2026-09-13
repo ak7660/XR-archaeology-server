@@ -13,7 +13,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
     { id: "accounts", title: "Accounts" },
     { id: "why", title: "Why we use it" },
     { id: "sharing", title: "Who else handles it" },
-    { id: "storage", title: "Where it's kept, and for how long" },
+    { id: "storage", title: "Where it’s kept, and for how long" },
     { id: "security", title: "Keeping it safe" },
     { id: "rights", title: "Your choices and rights" },
     { id: "children", title: "Children" },
@@ -36,7 +36,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
       <div className={styles.summary}>
         <h2>The short version</h2>
         <ul>
-          <li>Your location and camera are used on your phone for the map and augmented reality. They aren't sent to us.</li>
+          <li>Your location and camera are used on your phone for the map and augmented reality. They aren’t sent to us.</li>
           <li>Messages you type in the AI trip planner go to our server and to Moonshot AI, which writes the replies.</li>
           <li>The questionnaires are optional. Your answers are used to evaluate the app as part of a university research project.</li>
           <li>There are no ads or tracking tools, and we never sell your information.</li>
@@ -60,7 +60,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
       <Section id="who" title="Who we are">
         <p>
           {OPERATOR.name} is {OPERATOR.description}. It makes a free mobile app and this website to help visitors discover the
-          history of Vedi, Armenia, including augmented-reality reconstructions, maps, events and an AI trip planner. We're
+          history of Vedi, Armenia, including augmented-reality reconstructions, maps, events and an AI trip planner. We’re
           responsible for the information described here. You can reach us using the details under{" "}
           <a href="#contact">Contact us</a>.
         </p>
@@ -69,17 +69,17 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
       <Section id="collect" title="What the app collects">
         <h3>Your location</h3>
         <p>
-          If you allow it, the app uses your phone's location to show where you are on the map, how far you are from each site,
-          and when to start an augmented-reality scene. This happens on your phone. Your location isn't sent to our servers or
-          stored. The app only uses location while it's open. If you don't allow it, you can still browse everything, but the
-          map and augmented reality won't know where you are.
+          If you allow it, the app uses your phone’s location to show where you are on the map, how far you are from each site,
+          and when to start an augmented-reality scene. This happens on your phone. Your location isn’t sent to our servers or
+          stored. The app only uses location while it’s open. If you don’t allow it, you can still browse everything, but the
+          map and augmented reality won’t know where you are.
         </p>
 
         <h3>Your camera</h3>
         <p>
           The camera is only used for augmented reality, to place reconstructions over the real view. The camera feed is
-          processed on your phone and isn't recorded or uploaded. If you take a photo during augmented reality, it's saved to
-          your phone's gallery and isn't uploaded.
+          processed on your phone and isn’t recorded or uploaded. If you take a photo during augmented reality, it’s saved to
+          your phone’s gallery and isn’t uploaded.
         </p>
         <p>
           This application runs on Google Play Services for AR (ARCore), which is provided by Google and governed by the{" "}
@@ -91,14 +91,14 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
 
         <h3>Audio</h3>
         <p>
-          The app has no feature that records or listens to audio. When the app reads text aloud, it uses your phone's own
+          The app has no feature that records or listens to audio. When the app reads text aloud, it uses your phone’s own
           speech engine.
         </p>
 
         <h3>Things saved on your phone</h3>
         <p>
-          The places you save as favourites, your language choice and whether you've seen the welcome questionnaire are stored
-          on your phone. {!FEATURES.accounts && "They stay there and aren't sent to us."}
+          The places you save as favourites, your language choice and whether you’ve seen the welcome questionnaire are stored
+          on your phone. {!FEATURES.accounts && "They stay there and aren’t sent to us."}
         </p>
 
         <h3>The AI trip planner</h3>
@@ -107,19 +107,19 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
           interests and language, are sent to our server. Our server passes them to Moonshot AI, whose Kimi model writes the
           replies.{" "}
           {FEATURES.plannerHistory && FEATURES.accounts
-            ? "If you're signed in, the conversation and the plan it produces are saved to your account so you can come back to them. Without an account, they're kept only for the current conversation."
-            : "We don't save conversations. They're kept in our server's memory only while the conversation is going on, aren't linked to your name, and are wiped whenever the server restarts."}{" "}
-          Please don't type anything sensitive, such as health details or passport numbers, into the planner.
+            ? "If you’re signed in, the conversation and the plan it produces are saved to your account so you can come back to them. Without an account, they’re kept only for the current conversation."
+            : "We don’t save conversations. They’re kept in our server’s memory only while the conversation is going on, aren’t linked to your name, and are wiped whenever the server restarts."}{" "}
+          Please don’t type anything sensitive, such as health details or passport numbers, into the planner.
         </p>
 
         <h3>Questionnaires</h3>
         <p>
-          The app offers two optional questionnaires: one when you first open the app and one under Help and feedback. They're
-          part of the university research that evaluates the app. They're hosted by Tally, so your answers are stored by Tally
+          The app offers two optional questionnaires: one when you first open the app and one under Help and feedback. They’re
+          part of the university research that evaluates the app. They’re hosted by Tally, so your answers are stored by Tally
           and read by the project team. Each form tells you what it asks before you answer.{" "}
           {FEATURES.linkedFeedback && FEATURES.accounts
-            ? "If you're signed in, your answers are linked to your account so we can tell which answers came from the same person."
-            : "Your answers aren't linked to anything else the app knows about you."}
+            ? "If you’re signed in, your answers are linked to your account so we can tell which answers came from the same person."
+            : "Your answers aren’t linked to anything else the app knows about you."}
         </p>
 
         {FEATURES.eventBookings && FEATURES.accounts && (
@@ -139,9 +139,9 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
           keep the service secure and fix problems.
         </p>
 
-        <h3>What we don't do</h3>
+        <h3>What we don’t do</h3>
         <p>
-          The app has no advertising and no analytics or tracking tools. We don't build profiles of you, and we never sell or
+          The app has no advertising and no analytics or tracking tools. We don’t build profiles of you, and we never sell or
           rent your information.
         </p>
       </Section>
@@ -153,27 +153,27 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
             <ul>
               <li>your name and email address, and your phone number if you add it;</li>
               <li>
-                your password, stored only in a scrambled form (a hash) that can't be turned back into the password, so we can't
+                your password, stored only in a scrambled form (a hash) that can’t be turned back into the password, so we can’t
                 read it;
               </li>
               <li>
                 your favourites and augmented-reality collection
                 {FEATURES.eventBookings && ", your event bookings"}
                 {FEATURES.plannerHistory && ", your trip planner conversations"}
-                {FEATURES.linkedFeedback && " and which questionnaires you've answered"}, so they're there when you sign in on
+                {FEATURES.linkedFeedback && " and which questionnaires you’ve answered"}, so they’re there when you sign in on
                 another phone.
               </li>
             </ul>
             <p>
               We send a few emails that the account needs, such as a code to confirm your address or reset your password. We
-              don't send marketing emails.
+              don’t send marketing emails.
             </p>
             {FEATURES.googleSignIn && (
               <>
                 <h3>Signing in with Google</h3>
                 <p>
-                  If you choose "Continue with Google", Google tells us your name, email address, profile photo and a Google
-                  account ID. We don't receive your Google password or anything else from your Google account. Google's handling
+                  If you choose “Continue with Google”, Google tells us your name, email address, profile photo and a Google
+                  account ID. We don’t receive your Google password or anything else from your Google account. Google’s handling
                   of your sign-in is covered by the{" "}
                   <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
                     Google Privacy Policy
@@ -183,12 +183,12 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
               </>
             )}
             <p>
-              You can delete your account at any time. <Link href="/delete-account">Here's how</Link>.
+              You can delete your account at any time. <Link href="/delete-account">Here’s how</Link>.
             </p>
           </>
         ) : (
           <p>
-            The app doesn't offer accounts yet. Before we add them, we'll update this page to describe exactly what an account
+            The app doesn’t offer accounts yet. Before we add them, we’ll update this page to describe exactly what an account
             stores.
           </p>
         )}
@@ -208,7 +208,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
             <strong>To keep the service working and secure.</strong> Technical logs help us spot misuse and fix faults.
           </li>
         </ul>
-        <p>We don't use your information for advertising, and we don't make automated decisions about you.</p>
+        <p>We don’t use your information for advertising, and we don’t make automated decisions about you.</p>
       </Section>
 
       <Section id="sharing" title="Who else handles it">
@@ -218,12 +218,12 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
         </p>
         <ProcessorTable />
         <p>
-          Within the project, only the team members who run the app can access information on our servers. We'd share
+          Within the project, only the team members who run the app can access information on our servers. We’d share
           information with authorities only if the law required it.
         </p>
       </Section>
 
-      <Section id="storage" title="Where it's kept, and for how long">
+      <Section id="storage" title="Where it’s kept, and for how long">
         <p>
           Our servers and database are in Singapore. The companies in the table above may handle information in other countries,
           so your information may be processed outside the country where you live.
@@ -239,7 +239,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
             <strong>Trip planner conversations</strong>{" "}
             {FEATURES.plannerHistory && FEATURES.accounts
               ? "are kept in your account until you delete them or your account. Conversations without an account are wiped when our server restarts."
-              : "are wiped whenever our server restarts, and aren't kept anywhere else by us."}{" "}
+              : "are wiped whenever our server restarts, and aren’t kept anywhere else by us."}{" "}
             Moonshot AI keeps them according to its own policy.
           </li>
           <li>
@@ -264,35 +264,35 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
 
       <Section id="rights" title="Your choices and rights">
         <ul>
-          <li>You can turn location and camera access on or off at any time in your phone's settings.</li>
+          <li>You can turn location and camera access on or off at any time in your phone’s settings.</li>
           <li>Deleting the app removes everything it saved on your phone.</li>
           <li>
             You can ask us for a copy of the information we hold about you, ask us to correct it, or ask us to delete it. Email{" "}
-            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> and we'll reply within 30 days.{" "}
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> and we’ll reply within 30 days.{" "}
             <Link href="/delete-account">How to delete your data</Link>.
           </li>
           <li>You can withdraw from the research at any time by asking us to delete your questionnaire answers.</li>
         </ul>
         <p>
-          If you're unhappy with how we've handled your information, please contact us first. You can also complain to a data
-          protection authority. In Hong Kong that's the{" "}
+          If you’re unhappy with how we’ve handled your information, please contact us first. You can also complain to a data
+          protection authority. In Hong Kong that’s the{" "}
           <a href="https://www.pcpd.org.hk/" target="_blank" rel="noopener noreferrer">
             Office of the Privacy Commissioner for Personal Data
           </a>
-          , and elsewhere it's the authority where you live.
+          , and elsewhere it’s the authority where you live.
         </p>
       </Section>
 
       <Section id="children" title="Children">
         <p>
-          The app isn't aimed at children under 13, and we don't knowingly collect their information. If you think a child has
-          given us information, contact us and we'll delete it.
+          The app isn’t aimed at children under 13, and we don’t knowingly collect their information. If you think a child has
+          given us information, contact us and we’ll delete it.
         </p>
       </Section>
 
       <Section id="changes" title="Changes to this policy">
         <p>
-          When the app changes what it collects, we update this page and the date at the top. For significant changes, we'll
+          When the app changes what it collects, we update this page and the date at the top. For significant changes, we’ll
           also let you know in the app.
         </p>
       </Section>
