@@ -26,7 +26,7 @@ export const DELETION_DAYS = 30;
 
 export const FEATURES = {
   /** Email-and-password accounts in the app. Turns on the account sections on both pages. */
-  accounts: false,
+  accounts: true,
   /** "Continue with Google". Only meaningful with accounts on. */
   googleSignIn: false,
   /** Booking an event from the app. */
