@@ -107,7 +107,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
           interests and language, are sent to our server. Our server passes them to Moonshot AI, whose Kimi model writes the
           replies.{" "}
           {FEATURES.plannerHistory && FEATURES.accounts
-            ? "If you’re signed in, the conversation and the plan it produces are saved to your account so you can come back to them. Without an account, they’re kept only for the current conversation."
+            ? "If you’re signed in, the conversation and the plan it produces are saved to your account so you can come back to them. Without an account, the conversation is kept for up to 30 days so it can continue, then deleted automatically."
             : "We don’t save conversations. They’re kept in our server’s memory only while the conversation is going on, aren’t linked to your name, and are wiped whenever the server restarts."}{" "}
           Please don’t type anything sensitive, such as health details or passport numbers, into the planner.
         </p>
@@ -169,8 +169,8 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
               </li>
             </ul>
             <p>
-              We send a few emails that the account needs, such as a code to confirm your address or reset your password. We
-              don’t send marketing emails.
+              We send a few emails that the account needs, such as a code to confirm your address or reset your password
+              {FEATURES.eventBookings && ", and confirmations of your bookings"}. We don’t send marketing emails.
             </p>
             {FEATURES.googleSignIn && (
               <>
@@ -242,7 +242,7 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
           <li>
             <strong>Trip planner conversations</strong>{" "}
             {FEATURES.plannerHistory && FEATURES.accounts
-              ? "are kept in your account until you delete them or your account. Conversations without an account are wiped when our server restarts."
+              ? "are kept in your account until you delete them or your account. Conversations without an account are deleted automatically after 30 days without use."
               : "are wiped whenever our server restarts, and aren’t kept anywhere else by us."}{" "}
             Moonshot AI keeps them according to its own policy.
           </li>

@@ -30,9 +30,9 @@ export const FEATURES = {
   /** "Continue with Google". Only meaningful with accounts on. */
   googleSignIn: false,
   /** Booking an event from the app. */
-  eventBookings: false,
+  eventBookings: true,
   /** AI trip planner conversations saved to the account instead of only for the session. */
-  plannerHistory: false,
+  plannerHistory: true,
   /** Questionnaire answers linked to the account that sent them. */
   linkedFeedback: false,
 };

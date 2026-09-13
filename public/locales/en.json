@@ -334,7 +334,9 @@
       "venue": "Venue",
       "startDate": "Start date",
       "endDate": "End date",
-      "order": "Order"
+      "order": "Order",
+      "bookingEnabled": "Accept bookings in the app",
+      "capacity": "Places per day"
     },
     "experience": {
       "$": "Experience",
@@ -471,7 +473,36 @@
     },
     "groups": {
       "AR": "AR",
-      "hike": "Hike"
+      "hike": "Hike",
+      "events": "Events"
+    },
+    "eventRegistrations": {
+      "$": "Bookings",
+      "event": "Event",
+      "user": "App user",
+      "day": "Day",
+      "adults": "Adults",
+      "children": "Children",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "note": "Note",
+      "status": "Status",
+      "cancelledAt": "Cancelled at",
+      "createdAt": "Booked at"
+    },
+    "plannerConversations": {
+      "$": "Trip plans",
+      "user": "App user",
+      "title": "First message",
+      "conversationId": "AI conversation id",
+      "language": "Language",
+      "stage": "Stage",
+      "messages": "Messages",
+      "tripPlan": "Trip plan",
+      "tripData": "Trip details",
+      "createdAt": "Started",
+      "updatedAt": "Last message"
     }
   },
   "enum": {
@@ -576,6 +607,13 @@
           "Easy": "Easy",
           "Moderate": "Moderate",
           "Difficult": "Difficult"
+        }
+      },
+      "eventRegistrations": {
+        "status": {
+          "confirmed": "Confirmed",
+          "cancelled": "Cancelled",
+          "attended": "Attended"
         }
       }
     }

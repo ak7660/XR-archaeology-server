@@ -127,17 +127,10 @@ export function authAdminOnly(app: Application) {
   };
 }
 
-/** Admin-account roles allowed to change content through the admin API. */
-export const STAFF_ROLES = ["admin", "editor"];
-
-/** Is this call from CMS staff (or from inside the server)?
- * Calls made by server code carry no provider and are always allowed; the
- * internal server marks its own connections `internal`. */
-export function isStaff(params: any, roles: string[] = STAFF_ROLES): boolean {
-  if (!params?.provider) return true;
-  if (params.internal || params.user?.internal) return true;
-  return !!params.user && roles.includes(params.user.role);
-}
+import { isStaff, STAFF_ROLES } from "./roles";
+export { isStaff, STAFF_ROLES };
+export { bookingAppHooks, bookingStaffHooks } from "./bookings";
+export { plannerCleanup } from "./aiPlanner";
 
 function requireRole(roles: string[]) {
   return (hook: HookContext) => {
@@ -185,6 +178,40 @@ export function adminAccountHooks(app: Application) {
     },
     after: {
       all: [local.hooks.protect("password")],
+    },
+  };
+}
+
+/** Public API: records that belong to the signed-in user (e.g. saved trip plans).
+ * Reads and deletes are scoped to the caller; creating or changing them is left
+ * to server code. */
+export const ownRecordsReadRemove = {
+  before: {
+    find: [ownRecords],
+    get: [ownRecords],
+    remove: [ownRecords],
+    create: disallow("external"),
+    update: disallow("external"),
+    patch: disallow("external"),
+  },
+};
+
+function ownRecords(hook: HookContext) {
+  if (!hook.params.provider) return;
+  if (hook.method === "remove" && (hook.id === null || hook.id === undefined)) throw new errors.MethodNotAllowed();
+  hook.params.query = { ...(hook.params.query || {}), user: hook.params.user?._id };
+}
+
+/** Admin API: admins may list, read and delete; nobody edits through the CMS. */
+export function adminReadRemoveOnly(app: Application) {
+  const jwt = authentication.authenticate("jwt");
+  const admin = requireRole(["admin"]);
+  return {
+    before: {
+      all: [jwt, admin],
+      create: disallow("external"),
+      update: disallow("external"),
+      patch: disallow("external"),
     },
   };
 }

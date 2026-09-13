@@ -290,7 +290,9 @@
       "venue": "Վայր",
       "startDate": "Սկսման ամսաթիվ",
       "endDate": "Ավարտի ամսաթիվ",
-      "order": "Կարգ"
+      "order": "Կարգ",
+      "bookingEnabled": "Ընդունել ամրագրումներ հավելվածում",
+      "capacity": "Տեղեր օրական"
     },
     "experience": {
       "$": "Փորձառություն",
@@ -344,7 +346,8 @@
     },
     "groups": {
       "AR": "AR",
-      "hike": "Զբոսանք"
+      "hike": "Զբոսանք",
+      "events": "Միջոցառումներ"
     },
     "arReconstructions": {
       "$": "AR Վերակառուցումներ",
@@ -385,6 +388,34 @@
       "date": "Ամսաթիվ",
       "confirmDelete": "Ջնջե՞լ այս նկարը",
       "deleteFailed": "Նկարը ջնջել չհաջողվեց"
+    },
+    "eventRegistrations": {
+      "$": "Ամրագրումներ",
+      "event": "Միջոցառում",
+      "user": "Օգտատեր",
+      "day": "Օր",
+      "adults": "Մեծահասակներ",
+      "children": "Երեխաներ",
+      "name": "Անուն",
+      "email": "Էլ. հասցե",
+      "phone": "Հեռախոս",
+      "note": "Նշում",
+      "status": "Կարգավիճակ",
+      "cancelledAt": "Չեղարկվել է",
+      "createdAt": "Ամրագրվել է"
+    },
+    "plannerConversations": {
+      "$": "Ճամփորդական պլաններ",
+      "user": "Օգտատեր",
+      "title": "Առաջին հաղորդագրություն",
+      "conversationId": "AI զրույցի ID",
+      "language": "Լեզու",
+      "stage": "Փուլ",
+      "messages": "Հաղորդագրություններ",
+      "tripPlan": "Պլան",
+      "tripData": "Ճամփորդության տվյալներ",
+      "createdAt": "Սկսվել է",
+      "updatedAt": "Վերջին հաղորդագրություն"
     }
   },
   "enum": {
@@ -489,6 +520,13 @@
           "Easy": "Հեշտ",
           "Moderate": "Միջին",
           "Difficult": "Բարդ"
+        }
+      },
+      "eventRegistrations": {
+        "status": {
+          "confirmed": "Հաստատված",
+          "cancelled": "Չեղարկված",
+          "attended": "Ներկա է եղել"
         }
       }
     }

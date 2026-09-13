@@ -16,6 +16,7 @@ import * as authentication from "@feathersjs/authentication";
 import * as errors from "@feathersjs/errors";
 import _ from "lodash";
 import { clientIp, enforce, HOUR } from "@/server/feathers/rateLimit";
+import { deleteAiSession } from "@/server/feathers/aiPlanner";
 import {
   EDITABLE_FIELDS,
   LANGUAGES,
@@ -95,11 +96,17 @@ async function afterSignup(hook: HookContext) {
   }
 }
 
-/** Deleting an account deletes what it owns. */
+/** Deleting an account deletes what it owns: comments, bookings and saved trip plans
+ * (including the AI service's copy of each conversation). */
 async function afterRemove(hook: HookContext) {
   const id = hook.result?._id;
   if (!id) return;
-  await (db as any).ArComment.deleteMany({ user: id }).catch((e: any) => console.warn("[users] comment cleanup failed", e));
+  const warn = (what: string) => (e: any) => console.warn(`[users] ${what} cleanup failed`, e);
+  await (db as any).ArComment.deleteMany({ user: id }).catch(warn("comment"));
+  await (db as any).EventRegistration.deleteMany({ user: id }).catch(warn("booking"));
+  const plans = await (db as any).PlannerConversation.find({ user: id }, { conversationId: 1 }).lean().catch(() => []);
+  await Promise.all(plans.map((p: any) => deleteAiSession(p.conversationId)));
+  await (db as any).PlannerConversation.deleteMany({ user: id }).catch(warn("trip plan"));
 }
 
 export const hooks = {
