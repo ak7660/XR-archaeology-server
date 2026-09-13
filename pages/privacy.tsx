@@ -161,7 +161,11 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
                 {FEATURES.eventBookings && ", your event bookings"}
                 {FEATURES.plannerHistory && ", your trip planner conversations"}
                 {FEATURES.linkedFeedback && " and which questionnaires you’ve answered"}, so they’re there when you sign in on
-                another phone.
+                another phone;
+              </li>
+              <li>
+                comments you post in augmented reality. Other signed-in visitors see them with your first and last name, but
+                never your email address.
               </li>
             </ul>
             <p>

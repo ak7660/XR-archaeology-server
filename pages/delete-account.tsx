@@ -53,6 +53,7 @@ const DeleteAccountPage: NextPageWithLayout = () => {
             <ul>
               <li>your name, email address, phone number and password;</li>
               <li>your favourites and augmented-reality collection;</li>
+              <li>the comments you posted in augmented reality;</li>
               {FEATURES.eventBookings && <li>your event bookings;</li>}
               {FEATURES.plannerHistory && <li>your trip planner conversations.</li>}
             </ul>
