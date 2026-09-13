@@ -189,6 +189,53 @@ export function adminAccountHooks(app: Application) {
   };
 }
 
+/** The only parts of an app user that other people may see (e.g. beside a comment). */
+export const PUBLIC_USER_FIELDS = "firstName lastName username avatar";
+
+/**
+ * Public API `arComments`: comments are signed in and belong to their author.
+ * - create: the author is whoever is signed in, whatever the request says;
+ * - patch/remove: only your own comments; update is not offered;
+ * - reads: `$populate` of the author returns only PUBLIC_USER_FIELDS - a plain
+ *   populate would hand every reader the commenter's email and password hash.
+ */
+export const arCommentOwnership = {
+  before: {
+    find: [limitAuthorPopulate],
+    get: [limitAuthorPopulate],
+    create(hook: HookContext) {
+      if (!hook.params.provider) return;
+      const data = { ...(hook.data || {}) };
+      delete data._id;
+      delete data.createdAt;
+      hook.data = { ...data, user: hook.params.user?._id };
+    },
+    update: disallow("external"),
+    patch: [ownCommentsOnly, (hook: HookContext) => {
+      if (hook.params.provider && hook.data) {
+        delete hook.data.user;
+        delete hook.data._id;
+      }
+    }],
+    remove: [ownCommentsOnly],
+  },
+};
+
+function ownCommentsOnly(hook: HookContext) {
+  if (!hook.params.provider) return;
+  hook.params.query = { ...(hook.params.query || {}), user: hook.params.user?._id };
+}
+
+function limitAuthorPopulate(hook: HookContext) {
+  if (!hook.params.provider) return;
+  const q = hook.params.query || {};
+  if (!q.$populate) return;
+  const asked = (Array.isArray(q.$populate) ? q.$populate : [q.$populate]).map((p: any) => (typeof p === "string" ? p : p?.path));
+  if (asked.includes("user")) q.$populate = [{ path: "user", select: PUBLIC_USER_FIELDS }];
+  else delete q.$populate;
+  hook.params.query = q;
+}
+
 /**
  * Hook for arReconstructions service that automatically populates location data
  * and merges location fields (latitude, longitude, images, route, order) into the root level.
