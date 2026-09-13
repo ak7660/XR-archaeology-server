@@ -10,7 +10,9 @@ const schema: SchemaDefExt = {
 
   $services: {
     services: {
-      admins: {},
+      admins: {
+        hooks_Auth: ["adminAccountHooks"],
+      },
     },
   },
   $params: {

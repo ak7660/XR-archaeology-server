@@ -13,7 +13,8 @@ export default () => {
     },
     rest: true,
     socketio: true,
-    attachments: {},
+    // Serves images to the app; nobody uploads through the public API.
+    attachments: { canUpload: false },
   });
   return app;
 };

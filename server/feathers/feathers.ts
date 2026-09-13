@@ -10,7 +10,7 @@ import compress from "compression";
 import { RequestHandler } from "express";
 import { Socket } from "socket.io";
 import _ from "lodash";
-import handler from "./handler";
+import handler, { type ApiOpts } from "./handler";
 import dbInit, { db, DB, schemas } from "./db";
 import attachments, { AttachmentOpts } from "./attachments";
 import { SchemaDef } from "./schema";
@@ -34,10 +34,7 @@ interface RestOpts {
   limit: string;
 }
 
-export interface ApiOpts {
-  events?: boolean;
-  tasks?: boolean;
-}
+export type { ApiOpts } from "./handler";
 
 export interface FeathersOpts {
   auth?: boolean | AuthOpts;
