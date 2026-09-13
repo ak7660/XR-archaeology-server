@@ -105,3 +105,96 @@ export function codeMail(to: string, code: string, purpose: CodePurpose, minutes
 </div>`;
   return { to, subject: copy[purpose].subject(code), text, html };
 }
+
+export type BookingMailKind = "confirmed" | "cancelledByOrganiser";
+
+interface BookingDetails {
+  eventName: string;
+  /** Armenia day, YYYY-MM-DD. */
+  day: string;
+  adults: number;
+  children: number;
+}
+
+const BOOKING_COPY: Record<
+  MailLanguage,
+  {
+    subject: Record<BookingMailKind, (event: string) => string>;
+    intro: Record<BookingMailKind, string>;
+    people: (adults: number, children: number) => string;
+    outro: Record<BookingMailKind, string>;
+  }
+> = {
+  en: {
+    subject: {
+      confirmed: (e) => `You're booked: ${e}`,
+      cancelledByOrganiser: (e) => `Your booking for ${e} was cancelled`,
+    },
+    intro: {
+      confirmed: "Your place is booked. Here are the details:",
+      cancelledByOrganiser: "The organisers have cancelled this booking:",
+    },
+    people: (a, c) => `${a} ${a === 1 ? "adult" : "adults"}${c ? `, ${c} ${c === 1 ? "child" : "children"}` : ""}`,
+    outro: {
+      confirmed: "Plans changed? You can cancel from the event page in the Veditourism app. Reply to this email if you have a question.",
+      cancelledByOrganiser: "Reply to this email if you have a question.",
+    },
+  },
+  hy: {
+    subject: {
+      confirmed: (e) => `Ամրագրումը հաստատված է՝ ${e}`,
+      cancelledByOrganiser: (e) => `${e}՝ ձեր ամրագրումը չեղարկվել է`,
+    },
+    intro: {
+      confirmed: "Ձեր տեղն ամրագրված է։ Մանրամասները՝",
+      cancelledByOrganiser: "Կազմակերպիչները չեղարկել են այս ամրագրումը՝",
+    },
+    people: (a, c) => `${a} մեծահասակ${c ? `, ${c} երեխա` : ""}`,
+    outro: {
+      confirmed: "Ծրագրերը փոխվե՞լ են։ Կարող եք չեղարկել Veditourism հավելվածի միջոցառման էջից։ Հարցերի դեպքում պատասխանեք այս նամակին։",
+      cancelledByOrganiser: "Հարցերի դեպքում պատասխանեք այս նամակին։",
+    },
+  },
+  ru: {
+    subject: {
+      confirmed: (e) => `Бронь подтверждена: ${e}`,
+      cancelledByOrganiser: (e) => `Ваша бронь на «${e}» отменена`,
+    },
+    intro: {
+      confirmed: "Ваше место забронировано. Подробности:",
+      cancelledByOrganiser: "Организаторы отменили эту бронь:",
+    },
+    people: (a, c) => `взрослых: ${a}${c ? `, детей: ${c}` : ""}`,
+    outro: {
+      confirmed: "Планы изменились? Отменить бронь можно на странице события в приложении Veditourism. Если есть вопросы, ответьте на это письмо.",
+      cancelledByOrganiser: "Если есть вопросы, ответьте на это письмо.",
+    },
+  },
+};
+
+/** A booking confirmation, or notice that the organisers cancelled it. */
+export function bookingMail(kind: BookingMailKind, to: string, language: string | undefined, details: BookingDetails): Mail {
+  const lang: MailLanguage = language === "hy" || language === "ru" ? language : "en";
+  const copy = BOOKING_COPY[lang];
+  const locale = { en: "en-GB", hy: "hy-AM", ru: "ru-RU" }[lang];
+  const dayLabel = new Date(`${details.day}T00:00:00Z`).toLocaleDateString(locale, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const people = copy.people(details.adults, details.children);
+  const text = `Veditourism\n\n${copy.intro[kind]}\n\n${details.eventName}\n${dayLabel}\n${people}\n\n${copy.outro[kind]}\n`;
+  const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1b2730">
+<p style="font-family:Georgia,serif;font-size:20px;font-weight:700;margin:0 0 20px">Veditourism</p>
+<p style="margin:0 0 16px;line-height:1.5">${escapeHtml(copy.intro[kind])}</p>
+<div style="border:1px solid #DEE3E4;border-radius:12px;padding:16px 18px;margin:0 0 16px">
+<p style="margin:0 0 6px;font-size:18px;font-weight:700;color:${kind === "confirmed" ? "#0160D6" : "#6D6D6D"}">${escapeHtml(details.eventName)}</p>
+<p style="margin:0 0 4px">${escapeHtml(dayLabel)}</p>
+<p style="margin:0;color:#56646e">${escapeHtml(people)}</p>
+</div>
+<p style="margin:0;color:#56646e;font-size:13px;line-height:1.5">${escapeHtml(copy.outro[kind])}</p>
+</div>`;
+  return { to, subject: copy.subject[kind](details.eventName), text, html };
+}
