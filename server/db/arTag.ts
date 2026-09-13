@@ -9,7 +9,8 @@ const schema: SchemaDefExt = {
       arTags: {},
     },
     public: {
-      tags: {
+      // Same name as on the admin API; "tags" clashed with tag.ts on the public API.
+      arTags: {
         hooks_Auth: ["readOnlyHooks"],
       },
     },

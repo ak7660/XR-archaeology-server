@@ -16,7 +16,7 @@ const schema: SchemaDefExt = {
     },
     public: {
       arComments: {
-        hooks_Auth: ["authOnly"],
+        hooks_Auth: ["authOnly", "arCommentOwnership"],
       },
     },
   },
