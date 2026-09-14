@@ -9,7 +9,8 @@
     "api": {
       "type": "api",
       "source": "./index.ts",
-      "port": 9000
+      "port": 9000,
+      "proxyPublicAt": "/app"
     },
     "public": {
       "type": "api",

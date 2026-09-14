@@ -11,6 +11,7 @@ import http from "http";
 import https from "https";
 import dbInit, { setSchema } from "./db";
 import configs, { type ServerDef } from "@configs";
+import { mountHttpProxy, mountUpgradeProxy } from "./localProxy";
 import readline from "readline";
 
 function createServer<T = any>(servers: RequireContext, item: ServerDef) {
@@ -60,6 +61,12 @@ function createServer<T = any>(servers: RequireContext, item: ServerDef) {
   app.use(cors(corsOptions));
 
   app.set("port", configs.port);
+
+  // The admin API's domain also carries the public API at /app (see localProxy.ts).
+  // Mounted before the API so request bodies reach the public server unread.
+  if (item.proxyPublicAt && configs.has("public") && +configs.getPort("public") !== -1) {
+    mountHttpProxy(app, item.proxyPublicAt, configs.getPort("public"));
+  }
 
   if (mapi) {
     app.use("/api", function (req, res, next) {
@@ -162,6 +169,9 @@ async function startServer(servers: RequireContext) {
       server.https = s;
     } else {
       const s = http.createServer(server.app);
+      if (server.item.proxyPublicAt && configs.has("public") && +configs.getPort("public") !== -1) {
+        mountUpgradeProxy(s, server.item.proxyPublicAt, configs.getPort("public"));
+      }
       s.listen(configs.getPort(name));
       server.api.setup(s);
       server.http = s;

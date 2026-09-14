@@ -27,6 +27,8 @@ export interface ServerDef {
   exclude?: string[] | string;
   proxy?: boolean;
   corsAny?: boolean;
+  /** Also serve the public API under this path on this server's port (e.g. "/app"). */
+  proxyPublicAt?: string;
 }
 
 /**
