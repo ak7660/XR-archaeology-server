@@ -1,10 +1,9 @@
 /**
- * `GET /api/eventAvailability/:eventId` - which days of an event can be booked
- * and how many places are left on each. Public: it reveals counts only, never
- * who booked.
+ * `GET /api/eventAvailability/:eventId` - whether an event can be booked and how
+ * many places are left. Public: it reveals counts only, never who booked.
  */
 import * as errors from "@feathersjs/errors";
-import { bookableDays, bookedPeople } from "@/server/feathers/bookings";
+import { eventEnded, placesTaken } from "@/server/feathers/bookings";
 
 class EventAvailabilityService {
   app: any;
@@ -20,16 +19,15 @@ class EventAvailabilityService {
     } catch {
       throw new errors.NotFound("This event is no longer available.");
     }
-    const days = bookableDays(event);
-    const bookingEnabled = event.bookingEnabled !== false;
     const capacity: number | null = event.capacity || null;
-    const taken = capacity && days.length ? await bookedPeople(event._id) : {};
+    const ended = eventEnded(event);
     return {
       event: String(event._id),
-      bookingEnabled,
+      bookingEnabled: event.bookingEnabled !== false,
+      ended,
       capacity,
-      ended: !days.length,
-      days: days.map((day) => ({ day, left: capacity ? Math.max(0, capacity - (taken[day] || 0)) : null })),
+      /** Places left; null when the event has no limit. */
+      left: capacity ? Math.max(0, capacity - (await placesTaken(event._id))) : null,
     };
   }
 }

@@ -126,8 +126,8 @@ const PrivacyPolicyPage: NextPageWithLayout = () => {
           <>
             <h3>Event bookings</h3>
             <p>
-              When you book an event, we keep the event, the day you chose, how many adults and children are coming and the
-              contact details you give. The event organisers on our team see these to prepare for your visit.
+              When you book an event, we keep the event, how many people are coming and the name, email address and phone
+              number on your account. The event organisers on our team see these to prepare for your visit.
             </p>
           </>
         )}

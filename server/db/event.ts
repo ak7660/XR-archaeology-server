@@ -36,8 +36,8 @@ const schema: SchemaDefExt = {
 
   /** Whether visitors can book a place in the app. Off for events that are open to all. */
   bookingEnabled: { type: Boolean, default: true, $editor: { label: "Accept bookings in the app" } },
-  /** Places (adults + children) per day. Empty means no limit. */
-  capacity: { type: Number, min: 1, $editor: { label: "Places per day (leave empty for no limit)" } },
+  /** Total places people can book. Empty means no limit. */
+  capacity: { type: Number, min: 1, $editor: { label: "Places (leave empty for no limit)" } },
 
   order: { type: Number, default: 0, min: 0 },
   createdAt: { type: Date, default: Date },

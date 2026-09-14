@@ -336,7 +336,7 @@
       "endDate": "End date",
       "order": "Order",
       "bookingEnabled": "Accept bookings in the app",
-      "capacity": "Places per day"
+      "capacity": "Places"
     },
     "experience": {
       "$": "Experience",
@@ -480,9 +480,7 @@
       "$": "Bookings",
       "event": "Event",
       "user": "App user",
-      "day": "Day",
-      "adults": "Adults",
-      "children": "Children",
+      "people": "People",
       "name": "Name",
       "email": "Email",
       "phone": "Phone",
