@@ -343,7 +343,12 @@ export default function (auth: AuthOpts) {
       after: {
         create(hook) {
           if (hook.params?.connection) {
-            hook.params.connection.authenticated = true;
+            // Deliberately NOT `connection.authenticated = true`: that flag makes the
+            // authenticate hook skip every later call on this socket, so the user
+            // stayed frozen as it was at sign-in (an email confirmed afterwards still
+            // read as unconfirmed; a password change or deleted account didn't end
+            // the session). Feathers keeps the token on `connection.authentication`,
+            // and each call re-checks it and loads the user fresh.
             hook.params.connection.user = hook.result.user;
 
             app.emit("login", hook.result, hook.params);

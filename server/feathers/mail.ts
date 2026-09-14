@@ -110,10 +110,9 @@ export type BookingMailKind = "confirmed" | "cancelledByOrganiser";
 
 interface BookingDetails {
   eventName: string;
-  /** Armenia day, YYYY-MM-DD. */
-  day: string;
-  adults: number;
-  children: number;
+  startDate?: Date | string;
+  endDate?: Date | string;
+  people: number;
 }
 
 const BOOKING_COPY: Record<
@@ -121,7 +120,7 @@ const BOOKING_COPY: Record<
   {
     subject: Record<BookingMailKind, (event: string) => string>;
     intro: Record<BookingMailKind, string>;
-    people: (adults: number, children: number) => string;
+    people: (people: number) => string;
     outro: Record<BookingMailKind, string>;
   }
 > = {
@@ -134,7 +133,7 @@ const BOOKING_COPY: Record<
       confirmed: "Your place is booked. Here are the details:",
       cancelledByOrganiser: "The organisers have cancelled this booking:",
     },
-    people: (a, c) => `${a} ${a === 1 ? "adult" : "adults"}${c ? `, ${c} ${c === 1 ? "child" : "children"}` : ""}`,
+    people: (n) => (n === 1 ? "1 person" : `${n} people`),
     outro: {
       confirmed: "Plans changed? You can cancel from the event page in the Veditourism app. Reply to this email if you have a question.",
       cancelledByOrganiser: "Reply to this email if you have a question.",
@@ -149,7 +148,7 @@ const BOOKING_COPY: Record<
       confirmed: "Ձեր տեղն ամրագրված է։ Մանրամասները՝",
       cancelledByOrganiser: "Կազմակերպիչները չեղարկել են այս ամրագրումը՝",
     },
-    people: (a, c) => `${a} մեծահասակ${c ? `, ${c} երեխա` : ""}`,
+    people: (n) => `${n} հոգի`,
     outro: {
       confirmed: "Ծրագրերը փոխվե՞լ են։ Կարող եք չեղարկել Veditourism հավելվածի միջոցառման էջից։ Հարցերի դեպքում պատասխանեք այս նամակին։",
       cancelledByOrganiser: "Հարցերի դեպքում պատասխանեք այս նամակին։",
@@ -164,7 +163,7 @@ const BOOKING_COPY: Record<
       confirmed: "Ваше место забронировано. Подробности:",
       cancelledByOrganiser: "Организаторы отменили эту бронь:",
     },
-    people: (a, c) => `взрослых: ${a}${c ? `, детей: ${c}` : ""}`,
+    people: (n) => `Человек: ${n}`,
     outro: {
       confirmed: "Планы изменились? Отменить бронь можно на странице события в приложении Veditourism. Если есть вопросы, ответьте на это письмо.",
       cancelledByOrganiser: "Если есть вопросы, ответьте на это письмо.",
@@ -177,14 +176,21 @@ export function bookingMail(kind: BookingMailKind, to: string, language: string 
   const lang: MailLanguage = language === "hy" || language === "ru" ? language : "en";
   const copy = BOOKING_COPY[lang];
   const locale = { en: "en-GB", hy: "hy-AM", ru: "ru-RU" }[lang];
-  const dayLabel = new Date(`${details.day}T00:00:00Z`).toLocaleDateString(locale, {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-  const people = copy.people(details.adults, details.children);
+  // Event dates are Armenia wall-clock times.
+  const fmt = (d: Date | string | undefined, weekday: boolean) =>
+    d
+      ? new Date(d).toLocaleDateString(locale, {
+          ...(weekday ? { weekday: "long" as const } : {}),
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "Asia/Yerevan",
+        })
+      : "";
+  const start = fmt(details.startDate, true);
+  const end = details.endDate ? fmt(details.endDate, true) : "";
+  const dayLabel = !end || end === start ? start : `${fmt(details.startDate, false)} - ${fmt(details.endDate, false)}`;
+  const people = copy.people(details.people);
   const text = `Veditourism\n\n${copy.intro[kind]}\n\n${details.eventName}\n${dayLabel}\n${people}\n\n${copy.outro[kind]}\n`;
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1b2730">
 <p style="font-family:Georgia,serif;font-size:20px;font-weight:700;margin:0 0 20px">Veditourism</p>

@@ -1,22 +1,19 @@
 import type { SchemaDefExt } from "../feathers/schema";
 
 /**
- * A place booked at an event by an app user.
+ * A booking for an event by an app user: one per person per event.
  *
  * Name, email and phone are copied from the account when booking, so the list
  * in the admin stays readable even if the person later edits or deletes their
- * account. `day` is the Armenia calendar day (YYYY-MM-DD) - for a multi-day
- * event the visitor picks which day they come.
+ * account.
  *
- * Rules for app users (dates, capacity, one booking per day, cancelling) live
- * in server/feathers/bookings.ts.
+ * Rules for app users (one booking per event, capacity, cancelling) live in
+ * server/feathers/bookings.ts.
  */
 const schema: SchemaDefExt = {
   event: { type: "id", ref: "Event", required: true, index: true },
   user: { type: "id", ref: "User", index: true },
-  day: { type: String, required: true, index: true, $editor: { label: "Day (Armenia)", props: { readOnly: true } } },
-  adults: { type: Number, required: true, min: 1, max: 20 },
-  children: { type: Number, default: 0, min: 0, max: 20 },
+  people: { type: Number, required: true, min: 1, max: 10, $editor: { label: "People" } },
 
   name: { type: String, $editor: { label: "Name" } },
   email: { type: String, $editor: { label: "Email" } },
@@ -41,8 +38,7 @@ const schema: SchemaDefExt = {
   },
   $params: {
     editor: {
-      name: "$",
-      headers: ["event", "day", "name", "email", "adults", "children", "status", "createdAt"],
+      headers: ["event", "name", "email", "people", "status", "createdAt"],
       icon: "MdConfirmationNumber",
       group: "events",
       groupIcon: "MdEvent",
